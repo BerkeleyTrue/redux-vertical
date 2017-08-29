@@ -5,7 +5,10 @@
     "lint": "eslint --ext=js,jsx .",
     "lint:fix": "eslint . --ext=js,jsx --fix",
     "pretest": "npm run lint",
-    "test": "echo 'yo'",
+    "test": "nyc ava **/test/**.js*",
+    "test:watch": "ava --watch",
+    "test:cover": "nyc report --reporter=html",
+    "test:cover:alls": "nyc report --reporter=text-lcov | coveralls",
     "format": "prettier '**/*.js' '**/*.jsx' '!**/node_modules' --trailing-comma all --single-quote --write",
     "postformat": "npm run lint:fix",
     "commit": "git-cz",
@@ -16,9 +19,17 @@
       "path": "./node_modules/cz-freecodecamp"
     }
   },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "failFast": true
+  },
   "devDependencies": {
+    "ava": "^0.22.0",
     "babel-eslint": "^7.2.3",
     "commitizen": "^2.9.6",
+    "coveralls": "^2.13.1",
     "cz-freecodecamp": "^1.0.0",
     "eslint": "^4.5.0",
     "eslint-plugin-class-property": "^1.0.6",
@@ -27,6 +38,7 @@
     "eslint-plugin-react": "git+https://github.com/berkeleytrue/eslint-plugin-react.git#feat/rwr",
     "husky": "^0.14.3",
     "lerna": "^2.1.1",
+    "nyc": "^11.1.0",
     "prettier": "^1.5.2",
     "validate-commit-msg": "^2.14.0"
   }
