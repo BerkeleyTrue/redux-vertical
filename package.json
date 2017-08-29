@@ -1,5 +1,33 @@
 {
-	"devDependencies": {
-		"lerna": "^2.1.1"
-	}
+  "name": "berkeleys-redux-utils",
+  "scripts": {
+    "lerna:bootstrap": "lerna bootstrap",
+    "lint": "eslint --ext=js,jsx .",
+    "lint:fix": "eslint . --ext=js,jsx --fix",
+    "pretest": "npm run lint",
+    "test": "echo 'yo'",
+    "format": "prettier '**/*.js' '**/*.jsx' '!**/node_modules' --trailing-comma all --single-quote --write",
+    "postformat": "npm run lint:fix",
+    "commit": "git-cz",
+    "commitmsg": "validate-commit-msg"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-freecodecamp"
+    }
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "commitizen": "^2.9.6",
+    "cz-freecodecamp": "^1.0.0",
+    "eslint": "^4.5.0",
+    "eslint-plugin-class-property": "^1.0.6",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "git+https://github.com/berkeleytrue/eslint-plugin-react.git#feat/rwr",
+    "husky": "^0.14.3",
+    "lerna": "^2.1.1",
+    "prettier": "^1.5.2",
+    "validate-commit-msg": "^2.14.0"
+  }
 }
