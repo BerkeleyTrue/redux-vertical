@@ -5,24 +5,24 @@ export const config = {
   next: 'next',
   start: 'start',
   error: 'error',
-  complete: 'complete'
+  complete: 'complete',
 };
 
 export function createTypes(types, ns, delimiter = config.delimiter) {
   invariant(
     Array.isArray(types),
     'createTypes expected a Array of strings for types, but got %s',
-    types
+    types,
   );
   invariant(
     ns && typeof ns === 'string',
     'createTypes expected a string for ns, but got %s',
-    delimiter
+    delimiter,
   );
   invariant(
     typeof delimiter === 'string',
     'createAsyncTypes expected a string for delimiter, but got %s',
-    delimiter
+    delimiter,
   );
   return types.reduce((types, type) => {
     if (typeof type === 'string') {
@@ -50,19 +50,19 @@ export function createAsyncTypes(type, delimiter = config.delimiter) {
   invariant(
     type && typeof type === 'string',
     'createAsyncTypes expected a string for type, but got %s',
-    type
+    type,
   );
   invariant(
     typeof delimiter === 'string',
     'createAsyncTypes expected a string for delimiter, but got %s',
-    delimiter
+    delimiter,
   );
   const { start, next, complete, error } = config;
   return {
-    [ start ]: type + delimiter + config.start,
-    [ next ]: type + delimiter + config.next,
-    [ error ]: type + delimiter + config.error,
-    [ complete ]: type + delimiter + config.complete,
-    toString: () => type
+    [start]: type + delimiter + config.start,
+    [next]: type + delimiter + config.next,
+    [error]: type + delimiter + config.error,
+    [complete]: type + delimiter + config.complete,
+    toString: () => type,
   };
 }

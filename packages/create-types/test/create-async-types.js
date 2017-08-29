@@ -14,7 +14,7 @@ test('should throw if no type found', t => {
 test('should throw delimiter is not a string', t => {
   t.throws(
     () => createAsyncTypes('foo', null),
-    /expected a string for delimiter/
+    /expected a string for delimiter/,
   );
 });
 
@@ -24,7 +24,7 @@ test('should return default object with type', t => {
     start: 'foo.start',
     next: 'foo.next',
     error: 'foo.error',
-    complete: 'foo.complete'
+    complete: 'foo.complete',
   };
   const actual = createAsyncTypes('foo');
   t.is(expected.start, actual.start);
@@ -40,7 +40,7 @@ test('should respect delimiter arg', t => {
     start: 'foo_start',
     next: 'foo_next',
     error: 'foo_error',
-    complete: 'foo_complete'
+    complete: 'foo_complete',
   };
   const actual = createAsyncTypes('foo', '_');
   t.is(expected.start, actual.start);
@@ -57,7 +57,7 @@ test('should use config delimiter', t => {
     start: 'foo_start',
     next: 'foo_next',
     error: 'foo_error',
-    complete: 'foo_complete'
+    complete: 'foo_complete',
   };
   const actual = createAsyncTypes('foo');
   t.is(expected.start, actual.start);
@@ -74,7 +74,7 @@ test('should use config start', t => {
     START: 'foo.START',
     next: 'foo.next',
     error: 'foo.error',
-    complete: 'foo.complete'
+    complete: 'foo.complete',
   };
   const actual = createAsyncTypes('foo');
   t.is(expected.START, actual.START);
@@ -91,7 +91,7 @@ test('should use config next', t => {
     start: 'foo.start',
     NEXT: 'foo.NEXT',
     error: 'foo.error',
-    complete: 'foo.complete'
+    complete: 'foo.complete',
   };
   const actual = createAsyncTypes('foo');
   t.is(expected.start, actual.start);
@@ -108,7 +108,7 @@ test('should use config error', t => {
     start: 'foo.start',
     next: 'foo.next',
     ERROR: 'foo.ERROR',
-    complete: 'foo.complete'
+    complete: 'foo.complete',
   };
   const actual = createAsyncTypes('foo');
   t.is(expected.start, actual.start);
@@ -125,7 +125,7 @@ test('should use config complete', t => {
     start: 'foo.start',
     next: 'foo.next',
     error: 'foo.error',
-    COMPLETE: 'foo.COMPLETE'
+    COMPLETE: 'foo.COMPLETE',
   };
   const actual = createAsyncTypes(type);
   t.is(expected.start, actual.start);
