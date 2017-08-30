@@ -7,7 +7,7 @@
     "lint:fix": "eslint . --ext=js,jsx --fix",
     "build": "BABEL_ENV=production babel src --out-dir lib",
     "pretest": "npm run lint",
-    "test": "nyc ava **/test/**.js*",
+    "test": "nyc ava",
     "test:watch": "ava --watch",
     "test:cover": "nyc report --reporter=html",
     "test:cover:alls": "nyc report --reporter=text-lcov | coveralls",

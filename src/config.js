@@ -1,4 +1,5 @@
-export const config = {
+export default {
+  separator: '||',
   delimiter: '.',
   next: 'next',
   start: 'start',

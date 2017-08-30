@@ -1,7 +1,7 @@
 import invariant from 'invariant';
-import { config } from './config.js';
+import config from './config.js';
 
-export function createAsyncTypes(type, delimiter = config.delimiter) {
+export default function createAsyncTypes(type, delimiter = config.delimiter) {
   invariant(
     type && typeof type === 'string',
     'createAsyncTypes expected a string for type, but got %s',

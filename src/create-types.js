@@ -1,7 +1,7 @@
 import invariant from 'invariant';
-import { config } from './config.js';
+import config from './config.js';
 
-export function createTypes(types, ns, delimiter = config.delimiter) {
+export default function createTypes(types, ns, delimiter = config.delimiter) {
   invariant(
     Array.isArray(types),
     'createTypes expected a Array of strings for types, but got %s',
