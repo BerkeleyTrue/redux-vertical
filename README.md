@@ -1,6 +1,4 @@
-# Redux Create Types
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/BerkeleyTrue/redux-create-types.svg)](https://greenkeeper.io/)
+# Berkeleys-Redux-Utils
 
 A better way to create types.
 
@@ -8,13 +6,13 @@ A better way to create types.
 ## Install
 
 ```bash
-npm install --save redux-create-types
+npm install --save berkeleys-redux-utils
 ```
 
 ## Usage
 
 ```jsx
-import { createTypes, createAsyncTypes } from 'redux-create-types';
+import { createTypes, createAsyncTypes } from 'berkeleys-redux-utils';
 
 // we namespace all our types
 // you no longer have to worry about action types clashing
