@@ -9,10 +9,7 @@ export default function handleActions(types, createHandlers, defaultState, ns) {
     'createHandlers should be a function',
   );
   const handlers = createHandlers(types);
-  invariant(
-    _.isPlainObject(handlers),
-    'handlers should be a plain object.',
-  );
+  invariant(_.isPlainObject(handlers), 'handlers should be a plain object.');
   const reducers = Object.keys(handlers).map(type =>
     handleAction(type, handlers[type], defaultState),
   );
