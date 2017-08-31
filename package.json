@@ -11,6 +11,7 @@
     "test:watch": "ava --watch",
     "test:cover": "nyc report --reporter=html",
     "test:cover:alls": "nyc report --reporter=text-lcov | coveralls",
+    "test:cover:open": "open coverage/index.html",
     "format": "prettier '**/*.js' '**/*.jsx' '!**/node_modules' --trailing-comma all --single-quote --write",
     "postformat": "npm run lint:fix",
     "commit": "git-cz",
