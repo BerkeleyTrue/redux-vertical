@@ -1,3 +1,13 @@
+<a name="0.1.1"></a>
+## [0.1.1](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v0.1.0...v0.1.1) (2017-08-31)
+
+
+### Bug Fixes
+
+* **npm:** Add ignore to not ignore lib ([52b1615](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/52b1615))
+
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2017-08-31)
 
