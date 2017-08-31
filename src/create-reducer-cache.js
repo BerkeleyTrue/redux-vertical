@@ -11,11 +11,17 @@ export default function createReducerCache(...reducers) {
   if (!Array.isArray(reducers)) {
     reducers = [ reducers ];
   }
-  invariant(
-    reducers.every(reducer => reducer.toString !== Function.prototype.toString),
-    'Reducers must have a user defined toString function. %s',
-    reducers,
-  );
+  reducers.forEach(reducer => {
+    invariant(
+      typeof reducer === 'function',
+      `reducers should be functions but found ${reducer}`,
+    );
+    invariant(
+      reducer.toString !== Function.prototype.toString,
+      `reducers must have a user defined toString function.
+      check the reducer ${reducer}`,
+    );
+  });
   reducers.forEach(reducer => cache.set(reducer.toString(), reducer));
   return createReducerCache;
 }
