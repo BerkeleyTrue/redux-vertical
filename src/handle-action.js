@@ -3,14 +3,19 @@ import invariant from 'invariant';
 import config from './config';
 
 export default function handleAction(type, reducer = _.identity, defaultState) {
+  invariant(
+    typeof type === 'string',
+    'type should be a string'
+  );
   const types = _.toString(type).split(config.separator);
+  invariant(
+    _.isFunction(reducer) || _.isPlainObject(reducer),
+    'reducer should be a function or an object with next and throw reducers',
+  );
+
   invariant(
     !_.isUndefined(defaultState),
     `defaultState for reducer handling ${types.join(', ')} should be defined`,
-  );
-  invariant(
-    _.isFunction(reducer) || _.isPlainObject(reducer),
-    'Expected reducer to be a function or object with next and throw reducers',
   );
 
   const [
