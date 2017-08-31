@@ -38,4 +38,3 @@ export default function createTypes(types, ns, delimiter = config.delimiter) {
     return types;
   }, {});
 }
-
