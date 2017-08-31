@@ -1,3 +1,13 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v0.1.2...v0.2.0) (2017-08-31)
+
+
+### Features
+
+* Add composeReducers func ([340abc3](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/340abc3))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v0.1.1...v0.1.2) (2017-08-31)
 
