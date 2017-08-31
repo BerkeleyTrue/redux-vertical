@@ -1,4 +1,5 @@
 export { default as combineActions } from './combine-actions.js';
+export { default as composeReducers } from './compose-reducers.js';
 export { default as config } from './config.js';
 export { default as createAsyncTypes } from './create-async-types.js';
 export { default as createReducerCache } from './create-reducer-cache.js';
