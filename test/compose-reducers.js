@@ -8,31 +8,38 @@ test('should throw if ns is not a string', t => {
 });
 
 test('should return a reducer', t => {
-  t.is(
-    typeof composeReducers('foo', s => s),
-    'function'
-  );
+  t.is(typeof composeReducers('foo', s => s), 'function');
   const reducer = composeReducers(
     'app',
     (state, { type }) => type === 'foo' ? 1 : state,
-    (state, { type }) => type === 'bar' ? 2 : state
+    (state, { type }) => type === 'bar' ? 2 : state,
   );
   const actual0 = reducer(0, {});
   const actual1 = reducer(0, { type: 'foo' });
+  t.is(actual1, 1);
   const actual2 = reducer(0, { type: 'bar' });
   t.is(actual0, 0);
-  t.is(actual1, 1);
   t.is(actual2, 2);
+});
+
+test('should thread state through reducers', t => {
+  t.is(typeof composeReducers('foo', s => s), 'function');
+  const reducer = composeReducers(
+    'app',
+    (state, { type }) => type === 'foo' ? 1 : state,
+    (state, { type }) => {
+      t.is(state, 1);
+      return type === 'foo' ? 2 : state;
+    },
+  );
+  t.is(reducer(0, { type: 'foo' }), 2);
 });
 
 test('should stringify to ns', t => {
   const reducer = composeReducers(
     'app',
     (state, { type }) => type === 'foo' ? 1 : state,
-    (state, { type }) => type === 'bar' ? 2 : state
+    (state, { type }) => type === 'bar' ? 2 : state,
   );
-  t.is(
-    String(reducer),
-    'app'
-  );
+  t.is(String(reducer), 'app');
 });
