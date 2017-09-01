@@ -21,37 +21,19 @@ test('should throw if default state undefined', t => {
 
 test('should return a reducer', t => {
   const reducer = handleAction('foo', () => 1, 0);
-  t.is(
-    typeof reducer,
-    'function'
-  );
-  t.is(
-    reducer(undefined, { type: 'foo' }),
-    1
-  );
+  t.is(typeof reducer, 'function');
+  t.is(reducer(undefined, { type: 'foo' }), 1);
 });
 
 test('should accept reducer object', t => {
   const reducer = handleAction('foo', { next: () => 1, throw: () => 2 }, 0);
-  t.is(
-    reducer(0, { type: 'foo' }),
-    1
-  );
-  t.is(
-    reducer(0, { type: 'foo', error: true }),
-    2
-  );
+  t.is(reducer(0, { type: 'foo' }), 1);
+  t.is(reducer(0, { type: 'foo', error: true }), 2);
   const reducer2 = handleAction('foo', { next: () => 1 }, 0);
-  t.is(
-    reducer2(0, { type: 'foo' }),
-    1
-  );
+  t.is(reducer2(0, { type: 'foo' }), 1);
 });
 
 test('reducer should return default state', t => {
   const reducer = handleAction('foo', () => 1, 0);
-  t.is(
-    reducer(undefined, {}),
-    0
-  );
+  t.is(reducer(undefined, {}), 0);
 });
