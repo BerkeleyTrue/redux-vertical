@@ -1,3 +1,18 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v0.2.0...v1.0.0) (2017-09-01)
+
+
+### Features
+
+* **reducers:** Delete createReducerCache ([0f060b7](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/0f060b7))
+
+
+### BREAKING CHANGES
+
+* **reducers:** Removes createReducerCache in favor of combineReducers
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v0.1.2...v0.2.0) (2017-08-31)
 
