@@ -1,5 +1,7 @@
 # Berkeleys-Redux-Utils
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/BerkeleyTrue/berkeleys-redux-utils.svg)](https://greenkeeper.io/)
+
 A better way to create types.
 
 
