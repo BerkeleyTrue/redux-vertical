@@ -1,3 +1,13 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v2.0.0...v2.1.0) (2017-09-05)
+
+
+### Features
+
+* **combineReducers:** Throw when double combinedReducers ([a280c38](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/a280c38))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v1.0.0...v2.0.0) (2017-09-05)
 
