@@ -3,17 +3,27 @@ import invariant from 'invariant';
 import createFinalReducer from './reduce-reducers.js';
 
 const isCombinedReducer = Symbol('@@isCombinedReducer');
+const isEmpty = Symbol('@@isEmpty');
 
 export default function combineReducers(...reducers) {
   let cache = new Map();
   reducers = reducers.reduce((reducers, reducer) => {
     let _reducer = reducer;
     if (reducer && reducer[isCombinedReducer]) {
+      // if is an empty combinedReducer, filter out
+      invariant(
+        !reducer[isEmpty],
+        `
+found a combined reducer that has already been cleared.
+check the reducer with the name ${reducer[isEmpty]}
+`,
+      );
       _reducer = reducer.getCached();
       reducer.clearCache();
     }
     return reducers.concat(_reducer);
   }, []);
+
   reducers.forEach(reducer => {
     invariant(
       typeof reducer === 'function',
@@ -30,8 +40,10 @@ export default function combineReducers(...reducers) {
   finalReducer[isCombinedReducer] = true;
 
   finalReducer.clearCache = () => {
+    const names = Array.from(cache.keys()).join('|');
     cache.clear();
     cache = null;
+    finalReducer[isEmpty] = names;
   };
   finalReducer.getCached = () => Array.from(cache.values());
 

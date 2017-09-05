@@ -47,17 +47,55 @@ test('should create flat reducer', t => {
     type === 'foo' ? { val: 1 } : state;
   fooReducer.toString = () => 'foo';
   const barReducer = (state = { val: 0 }, { type }) =>
-    type === 'foo' ? { val: 2 } : state;
+    type === 'bar' ? { val: 2 } : state;
   barReducer.toString = () => 'bar';
   const bazReducer = (state = { val: 0 }, { type }) =>
     type === 'baz' ? { val: 3 } : state;
   bazReducer.toString = () => 'baz';
+  const booReducer = (state = { val: 0 }, { type }) =>
+    type === 'boo' ? { val: 4 } : state;
+  booReducer.toString = () => 'boo';
   const reducer = combineReducers(fooReducer, barReducer);
-  const reducer2 = combineReducers(reducer, bazReducer);
+  const reducer2 = combineReducers(booReducer, bazReducer);
+  const reducer3 = combineReducers(reducer, reducer2);
 
-  t.deepEqual(reducer2({ val: 0 }, { type: 'baz' }), {
+  t.deepEqual(reducer3({}, { type: 'foo' }), {
+    foo: { val: 1 },
+    bar: { val: 0 },
+    baz: { val: 0 },
+    boo: { val: 0 },
+  });
+  t.deepEqual(reducer3({}, { type: 'bar' }), {
+    foo: { val: 0 },
+    bar: { val: 2 },
+    baz: { val: 0 },
+    boo: { val: 0 },
+  });
+  t.deepEqual(reducer3({}, { type: 'baz' }), {
     foo: { val: 0 },
     bar: { val: 0 },
     baz: { val: 3 },
+    boo: { val: 0 },
   });
+  t.deepEqual(reducer3({}, { type: 'boo' }), {
+    foo: { val: 0 },
+    bar: { val: 0 },
+    baz: { val: 0 },
+    boo: { val: 4 },
+  });
+});
+
+test('should throw double entry combinedReducers with name', t => {
+  const fooReducer = (state = { val: 0 }, { type }) =>
+    type === 'foo' ? { val: 1 } : state;
+  fooReducer.toString = () => 'foo';
+  const barReducer = (state = { val: 0 }, { type }) =>
+    type === 'bar' ? { val: 2 } : state;
+  barReducer.toString = () => 'bar';
+  const reducer = combineReducers(fooReducer, barReducer);
+
+  t.throws(
+    () => combineReducers(reducer, reducer),
+    /found a combined reducer.*[\n]*.*foo\|bar/,
+  );
 });
