@@ -1,4 +1,5 @@
 import test from 'ava';
+import sinon from 'sinon';
 
 import { combineReducers } from '../src';
 
@@ -85,17 +86,19 @@ test('should create flat reducer', t => {
   });
 });
 
-test('should throw double entry combinedReducers with name', t => {
-  const fooReducer = (state = { val: 0 }, { type }) =>
-    type === 'foo' ? { val: 1 } : state;
+test('should filter out double entries', t => {
+  const fooReducer = sinon.spy(
+    (state = { val: 0 }, { type }) => type === 'foo' ? { val: 1 } : state,
+  );
   fooReducer.toString = () => 'foo';
-  const barReducer = (state = { val: 0 }, { type }) =>
-    type === 'bar' ? { val: 2 } : state;
+  const barReducer = sinon.spy(
+    (state = { val: 0 }, { type }) => type === 'bar' ? { val: 2 } : state,
+  );
   barReducer.toString = () => 'bar';
   const reducer = combineReducers(fooReducer, barReducer);
-
-  t.throws(
-    () => combineReducers(reducer, reducer),
-    /found a combined reducer.*[\n]*.*foo\|bar/,
-  );
+  const combined = combineReducers(reducer, reducer);
+  const actual = combined(undefined, { type: 'foo' });
+  t.is(actual.foo.val, 1);
+  t.is(fooReducer.callCount, 1);
+  t.is(barReducer.callCount, 1);
 });
