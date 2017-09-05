@@ -1,3 +1,18 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v1.0.0...v2.0.0) (2017-09-05)
+
+
+### Features
+
+* **handleActions:** Defer createHandlers call ([30cd6df](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/30cd6df))
+
+
+### BREAKING CHANGES
+
+* **handleActions:** Changes handleActions API
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v0.2.0...v1.0.0) (2017-09-01)
 
