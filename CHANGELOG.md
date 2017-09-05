@@ -1,3 +1,19 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v2.1.0...v3.0.0) (2017-09-05)
+
+
+### Features
+
+* **combineReducers:** Filter out duplicates ([bec9b26](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/bec9b26))
+
+
+### BREAKING CHANGES
+
+* **combineReducers:** combinedReducer will no longer throw for duplicated
+combined reducer
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v2.0.0...v2.1.0) (2017-09-05)
 
