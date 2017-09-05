@@ -3,20 +3,26 @@ import invariant from 'invariant';
 
 import handleAction from './handle-action.js';
 
-export default function handleActions(types, createHandlers, defaultState, ns) {
-  invariant(
-    _.isFunction(createHandlers),
-    'createHandlers should be a function',
-  );
-  const handlers = createHandlers(types);
+function creacteReducers(createHandlers, defaultState) {
+  const handlers = createHandlers();
   invariant(
     _.isPlainObject(handlers),
     'createHandlers should return a plain object.',
   );
-  const reducers = Object.keys(handlers).map(type =>
+  return Object.keys(handlers).map(type =>
     handleAction(type, handlers[type], defaultState),
   );
+}
+export default function handleActions(createHandlers, defaultState, ns) {
+  let reducers;
+  invariant(
+    _.isFunction(createHandlers),
+    'createHandlers should be a function',
+  );
   function reducer(state = defaultState, action) {
+    if (!reducers) {
+      reducers = creacteReducers(createHandlers, defaultState);
+    }
     return reducers.reduce((state, reducer) => reducer(state, action), state);
   }
   if (ns) {
