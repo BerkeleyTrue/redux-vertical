@@ -1,6 +1,6 @@
 {
   "name": "berkeleys-redux-utils",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint --ext=js,jsx .",
