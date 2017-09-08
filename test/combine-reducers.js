@@ -115,3 +115,33 @@ test("should not default other ns's out double entries", t => {
   t.is(actual.booo.val, 1);
   t.is(actual.bar.val, 4);
 });
+
+test('should change state with new ref', t => {
+  const fooReducer = (state = { val: 0 }, { type }) =>
+    type === 'booo' ? { val: 1 } : state;
+  fooReducer.toString = () => 'booo';
+  const barReducer = (state = { val: 0 }, { type }) =>
+    type === 'bar' ? { val: 2 } : state;
+  barReducer.toString = () => 'bar';
+  const reducer = combineReducers(fooReducer, barReducer);
+  const original = { bar: { val: 4 } };
+  const actual = reducer(original, { type: 'booo' });
+  t.is(actual.booo.val, 1);
+  t.is(actual.bar.val, 4);
+  t.not(original, actual);
+});
+
+test("should not change ref is state doesn't change", t => {
+  const fooReducer = (state = { val: 0 }, { type }) =>
+    type === 'foo' ? { val: 1 } : state;
+  fooReducer.toString = () => 'foo';
+  const barReducer = (state = { val: 0 }, { type }) =>
+    type === 'bar' ? { val: 2 } : state;
+  barReducer.toString = () => 'bar';
+  const reducer = combineReducers(fooReducer, barReducer);
+  const original = { foo: { val: 0 }, bar: { val: 4 } };
+  const actual = reducer(original, { type: 'booo' });
+  t.is(actual.foo.val, 0);
+  t.is(actual.bar.val, 4);
+  t.is(original, actual);
+});

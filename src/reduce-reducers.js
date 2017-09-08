@@ -1,32 +1,19 @@
-const createGetNS = (isNS, ns) =>
-  isNS ? (state = {}) => state[ns] : state => state;
-
-const createSetNS = (isNS, ns) =>
-  isNS ?
-    (state = {}, value) => {
-      state[ns] = value;
-      return state;
-    } :
-    (state, value) => value;
-
 export default function createFinalReducer(isNS, reducers) {
   return (state = {}, action) => {
     let hasChanged = false;
 
-    const combinedOrComposed = reducers.reduce((oldState, reducer) => {
-      const prevState = createGetNS(isNS, reducer)(oldState);
-      const nextState = createSetNS(isNS, reducer)(
-        oldState,
-        reducer(prevState, action),
-      );
+    const combinedOrComposed = reducers.reduce((iteratedState, reducer) => {
+      const prevState = isNS ? state[reducer] : iteratedState;
+      const nextState = reducer(prevState, action);
 
       hasChanged = hasChanged || prevState !== nextState;
 
       if (isNS) {
-        return oldState;
+        iteratedState[reducer] = nextState;
+        return hasChanged ? iteratedState : state;
       }
-      return hasChanged ? nextState : oldState;
-    }, state);
+      return hasChanged ? nextState : iteratedState;
+    }, isNS ? {} : state);
 
     return hasChanged ? combinedOrComposed : state;
   };
