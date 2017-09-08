@@ -1,3 +1,13 @@
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v3.0.1...v3.1.0) (2017-09-08)
+
+
+### Features
+
+* **build:** Use babel-plugin-lodash ([d86c764](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/d86c764))
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v3.0.0...v3.0.1) (2017-09-08)
 
