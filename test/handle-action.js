@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { config, handleAction } from '../src';
+import { config, combineActions, handleAction } from '../src';
 
 const defaultConfig = Object.assign({}, config);
 test.beforeEach(() => {
@@ -36,4 +36,21 @@ test('should accept reducer object', t => {
 test('reducer should return default state', t => {
   const reducer = handleAction('foo', () => 1, 0);
   t.is(reducer(undefined, {}), 0);
+});
+
+test('should work with combineActions', t => {
+  const reducer = handleAction(
+    combineActions('foo', 'bar'),
+    (state, { type }) => Object.assign({}, state, { type }),
+    {},
+  );
+  t.deepEqual(reducer({ baz: 0, type: 'foo' }, { type: 'bar' }), {
+    baz: 0,
+    type: 'bar',
+  });
+
+  t.deepEqual(reducer({ baz: 0, type: 'bar' }, { type: 'foo' }), {
+    baz: 0,
+    type: 'foo',
+  });
 });
