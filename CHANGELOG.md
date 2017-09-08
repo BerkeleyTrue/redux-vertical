@@ -1,3 +1,13 @@
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v3.0.0...v3.0.1) (2017-09-08)
+
+
+### Bug Fixes
+
+* **combineReducers:** Should respect oldState ([0ace3e9](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/0ace3e9))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v2.1.0...v3.0.0) (2017-09-05)
 
