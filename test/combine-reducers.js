@@ -24,8 +24,8 @@ test('should change state per namespace', t => {
   barReducer.toString = () => 'bar';
   const reducer = combineReducers(fooReducer, barReducer);
 
-  t.deepEqual(reducer(0, { type: 'foo' }), { foo: 1, bar: 0 });
-  t.deepEqual(reducer(0, { type: 'bar' }), { foo: 0, bar: 2 });
+  t.deepEqual(reducer({}, { type: 'foo' }), { foo: 1, bar: 0 });
+  t.deepEqual(reducer({}, { type: 'bar' }), { foo: 0, bar: 2 });
 });
 
 test('should change state per namespace for all ns', t => {
@@ -37,7 +37,7 @@ test('should change state per namespace for all ns', t => {
   barReducer.toString = () => 'bar';
   const reducer = combineReducers(fooReducer, barReducer);
 
-  t.deepEqual(reducer(0, { type: 'foo' }), {
+  t.deepEqual(reducer({}, { type: 'foo' }), {
     foo: { val: 1 },
     bar: { val: 2 },
   });
@@ -101,4 +101,17 @@ test('should filter out double entries', t => {
   t.is(actual.foo.val, 1);
   t.is(fooReducer.callCount, 1);
   t.is(barReducer.callCount, 1);
+});
+
+test("should not default other ns's out double entries", t => {
+  const fooReducer = (state = { val: 0 }, { type }) =>
+    type === 'booo' ? { val: 1 } : state;
+  fooReducer.toString = () => 'booo';
+  const barReducer = (state = { val: 0 }, { type }) =>
+    type === 'bar' ? { val: 2 } : state;
+  barReducer.toString = () => 'bar';
+  const reducer = combineReducers(fooReducer, barReducer);
+  const actual = reducer({ bar: { val: 4 } }, { type: 'booo' });
+  t.is(actual.booo.val, 1);
+  t.is(actual.bar.val, 4);
 });
