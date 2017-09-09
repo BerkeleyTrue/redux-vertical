@@ -1,3 +1,13 @@
+<a name="3.1.2"></a>
+## [3.1.2](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v3.1.1...v3.1.2) (2017-09-09)
+
+
+### Bug Fixes
+
+* Remove reduce-reducer ([7dd4a05](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/7dd4a05))
+
+
+
 <a name="3.1.1"></a>
 ## [3.1.1](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v3.1.0...v3.1.1) (2017-09-08)
 
