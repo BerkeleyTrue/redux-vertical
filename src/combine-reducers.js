@@ -1,7 +1,5 @@
 import invariant from 'invariant';
 
-import createFinalReducer from './reduce-reducers.js';
-
 const isCombinedReducer = Symbol('@@isCombinedReducer');
 
 export default function combineReducers(...reducers) {
@@ -40,7 +38,22 @@ export default function combineReducers(...reducers) {
   reducers.forEach(r => cache.set(r.toString(), r));
 
   // create final reducer
-  const finalReducer = createFinalReducer(true, reducers);
+  function finalReducer(state = {}, action) {
+    let hasChanged = false;
+    const nextState = {};
+    const numOfReducers = reducers.length;
+    for (let i = 0; i < numOfReducers; i++) {
+      const reducer = reducers[i];
+      const previousStateForKey = state[reducer];
+      const nextStateForKey = reducer(previousStateForKey, action);
+      if (typeof nextStateForKey === 'undefined') {
+        throw new Error(`got undefined state for ${reducer}`);
+      }
+      nextState[reducer] = nextStateForKey;
+      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+    }
+    return hasChanged ? nextState : state;
+  }
 
   // mark as a combinedReducer
   finalReducer[isCombinedReducer] = true;
