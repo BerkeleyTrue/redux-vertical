@@ -54,3 +54,18 @@ test('should work with combineActions', t => {
     type: 'foo',
   });
 });
+
+test('should not mutate', t => {
+  const reducer = handleAction(
+    'foo',
+    state => Object.assign({}, state, { val: 'foo' }),
+    { val: 'notfoo' },
+  );
+  t.deepEqual(reducer(undefined, { type: 'notfoo' }), { val: 'notfoo' });
+  const original = { val: 'notfoo' };
+  const actual = reducer(original, { type: 'foo' });
+  const actual2 = reducer(original, { type: 'notfoo' });
+  t.deepEqual(actual, { val: 'foo' });
+  t.deepEqual(actual2, original);
+  t.is(actual2, original);
+});

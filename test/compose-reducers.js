@@ -35,6 +35,17 @@ test('should thread state through reducers', t => {
   t.is(reducer(0, { type: 'foo' }), 2);
 });
 
+test('should not mutate state', t => {
+  const reducer = composeReducers(
+    'app',
+    (state = {}, { type }) => type === 'foo' ? { foo: 1 } : state,
+    (state = {}, { type }) => type === 'bar' ? { bar: 1 } : state,
+  );
+  const original = { foo: 2, bar: 2 };
+  t.not(original, reducer(original, { type: 'bar' }));
+  t.is(original, reducer(original, { type: 'hello' }));
+});
+
 test('should stringify to ns', t => {
   const reducer = composeReducers(
     'app',
