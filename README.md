@@ -61,7 +61,7 @@ export const fetchReturnedAValue = () => ({ type: types.fetch.next });
 ## API
 
 
-## config
+### config
 
 An object with defaults for the delimiter as well as the async type value
 changing the value of these properties will allow you to set the default
@@ -77,7 +77,7 @@ const config = {
 };
 ```
 
-## createTypes
+### createTypes
 
 A function that takes three inputs and returns an object where the keys
 correspond to action types.
@@ -99,7 +99,7 @@ createTypes(
 })
 ```
 
-## createAsyncTypes
+### createAsyncTypes
 
 A function that takes a type and returns an object with postfix stages.
 
@@ -131,3 +131,7 @@ createAsyncTypes(
   toString: () => type
 });
 ```
+## Prior Work
+
+This project is a derivative of [redux-actions](https://github.com/reduxactions/redux-actions) with some additional API and some slight modifications to make those functions work exclusive of Symbol types. As such this library will not work with Symbol type actions.
+
