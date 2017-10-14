@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { config, combineActions, handleAction } from '../src';
+import { config, createAsyncTypes, combineActions, handleAction } from '../src';
 
 const defaultConfig = Object.assign({}, config);
 test.beforeEach(() => {
@@ -50,6 +50,20 @@ test('should work with combineActions', t => {
   });
 
   t.deepEqual(reducer({ baz: 0, type: 'bar' }, { type: 'foo' }), {
+    baz: 0,
+    type: 'foo',
+  });
+});
+
+test('should work with async types', t => {
+  const foo = createAsyncTypes('foo');
+  const reducer = handleAction(
+    foo,
+    (state, { type }) => Object.assign({}, state, { type }),
+    {},
+  );
+
+  t.deepEqual(reducer({ baz: 0, type: 'bar' }, { type: foo.toString() }), {
     baz: 0,
     type: 'foo',
   });

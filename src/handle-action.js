@@ -3,7 +3,7 @@ import invariant from 'invariant';
 import config from './config';
 
 export default function handleAction(type, reducer = _.identity, defaultState) {
-  invariant(typeof type === 'string', 'type should be a string');
+  invariant(type, 'type should be a string or an async type object');
   const types = _.toString(type).split(config.separator);
   invariant(
     _.isFunction(reducer) || _.isPlainObject(reducer),
