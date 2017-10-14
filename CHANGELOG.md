@@ -1,3 +1,14 @@
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v3.1.2...v3.2.0) (2017-10-14)
+
+
+### Features
+
+* **createAction:** Adds createAction ([7d153dd](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/7d153dd))
+* **handleActions:** Should work with async type object ([6daca60](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/6daca60))
+
+
+
 <a name="3.1.2"></a>
 ## [3.1.2](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v3.1.1...v3.1.2) (2017-09-09)
 
