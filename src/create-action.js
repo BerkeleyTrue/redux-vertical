@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import invariant from 'invariant';
 
+import addNS from './add-ns.js';
+
 export default function createAction(
   _type,
   payloadCreator = _.identity,
@@ -40,7 +42,5 @@ export default function createAction(
     return action;
   };
 
-  actionCreator.toString = () => type;
-
-  return actionCreator;
+  return addNS(type, actionCreator);
 }

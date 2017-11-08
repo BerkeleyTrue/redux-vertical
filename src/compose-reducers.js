@@ -1,5 +1,7 @@
 import invariant from 'invariant';
 
+import addNS from './add-ns.js';
+
 export default function composeReducers(ns, ...reducers) {
   invariant(
     typeof ns === 'string',
@@ -23,6 +25,5 @@ export default function composeReducers(ns, ...reducers) {
     }, state);
   }
 
-  composedReducer.toString = () => ns;
-  return composedReducer;
+  return addNS(ns, composedReducer);
 }

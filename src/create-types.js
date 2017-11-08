@@ -1,5 +1,7 @@
 import invariant from 'invariant';
+
 import config from './config.js';
+import addNS from './add-ns.js';
 
 export default function createTypes(types, ns, delimiter = config.delimiter) {
   invariant(
@@ -25,15 +27,15 @@ export default function createTypes(types, ns, delimiter = config.delimiter) {
       type[config.start] &&
       typeof type.toString === 'function'
     ) {
-      types[type.toString()] = Object.keys(type).reduce((typeObj, key) => {
+      types[type] = Object.keys(type).reduce((typeObj, key) => {
         const value = type[key];
         if (key === 'toString') {
-          typeObj.toString = () => ns + delimiter + value();
+          return typeObj;
         } else if (value && typeof value === 'string') {
           typeObj[key] = ns + delimiter + value;
         }
         return typeObj;
-      }, {});
+      }, addNS(ns + delimiter + type, {}));
     }
     return types;
   }, {});

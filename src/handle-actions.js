@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import invariant from 'invariant';
 
+import addNS from './add-ns.js';
 import handleAction from './handle-action.js';
 
 function creacteReducers(createHandlers, defaultState) {
@@ -26,7 +27,7 @@ export default function handleActions(createHandlers, defaultState, ns) {
     return reducers.reduce((state, reducer) => reducer(state, action), state);
   }
   if (ns) {
-    reducer.toString = () => ns;
+    return addNS(ns, reducer);
   }
   return reducer;
 }
