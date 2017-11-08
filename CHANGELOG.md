@@ -1,3 +1,20 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v3.2.0...v4.0.0) (2017-11-08)
+
+
+### Features
+
+* Adds `addNS` ([7537b46](https://github.com/BerkeleyTrue/berkeleys-redux-utils/commit/7537b46))
+
+
+### BREAKING CHANGES
+
+* This changes the internal behavior of functions when
+dealing with ns. If using this library to add ns to reducers then you
+should be fine. But to be safe this is being released as breaking
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://github.com/BerkeleyTrue/berkeleys-redux-utils/compare/v3.1.2...v3.2.0) (2017-10-14)
 
