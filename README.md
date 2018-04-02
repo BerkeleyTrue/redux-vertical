@@ -1,20 +1,19 @@
-# Berkeleys-Redux-Utils
+# Redux-Vertical
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/BerkeleyTrue/berkeleys-redux-utils.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/BerkeleyTrue/redux-vertical.svg)](https://greenkeeper.io/)
 
-A better way to create types.
-
+Build large redux apps using vertically separated features.
 
 ## Install
 
 ```bash
-npm install --save berkeleys-redux-utils
+npm install --save redux-vertical
 ```
 
 ## Usage
 
 ```jsx
-import { createTypes, createAsyncTypes } from 'berkeleys-redux-utils';
+import { createTypes, createAsyncTypes } from 'redux-vertical';
 
 // we namespace all our types
 // you no longer have to worry about action types clashing

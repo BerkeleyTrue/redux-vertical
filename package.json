@@ -1,7 +1,8 @@
 {
-  "name": "berkeleys-redux-utils",
-  "version": "4.0.0",
+  "name": "redux-vertical",
+  "version": "0.0.1",
   "main": "lib/index.js",
+  "description": "Build redux vertically",
   "scripts": {
     "lint": "eslint --ext=js,jsx .",
     "lint:fix": "eslint . --ext=js,jsx --fix",
@@ -64,5 +65,6 @@
     "redux",
     "redux-actions",
     "types"
-  ]
+  ],
+  "license": "MIT"
 }
