@@ -1,6 +1,6 @@
 {
   "name": "redux-vertical",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "lib/index.js",
   "description": "Build redux vertically",
   "scripts": {
