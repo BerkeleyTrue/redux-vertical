@@ -1,9 +1,18 @@
+// @flow
 import invariant from 'invariant';
 
 import config from './config.js';
 import addNS from './add-ns.js';
+import type { AsyncActionTypeMap } from './create-async-types.js';
 
-export default function createTypes(types, ns, delimiter = config.delimiter) {
+export type ActionTypeMap = {
+  [type: string]: string | AsyncActionTypeMap,
+};
+export default function createTypes(
+  types: Array<string>,
+  ns: string,
+  delimiter: string = config.delimiter,
+): ActionTypeMap {
   invariant(
     Array.isArray(types),
     'createTypes expected a Array of strings for types, but got %s',

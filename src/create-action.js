@@ -1,13 +1,15 @@
+// @flow
+import type { Action } from './flow-types.js';
 import _ from 'lodash';
 import invariant from 'invariant';
 
 import addNS from './add-ns.js';
 
-export default function createAction(
-  _type,
-  payloadCreator = _.identity,
-  metaCreator,
-) {
+export default function createAction<Payload: any, Meta: any>(
+  _type: string,
+  payloadCreator: (...any) => Payload = _.identity,
+  metaCreator: (...any) => Meta,
+): (...any) => Action {
   invariant(_type, 'type cannot be undefined or null');
   invariant(
     _.isFunction(payloadCreator) || _.isNull(payloadCreator),
@@ -25,7 +27,7 @@ export default function createAction(
 
   const actionCreator = (...args) => {
     const payload = finalPayloadCreator(...args);
-    const action = { type };
+    const action: Action = { type };
 
     if (payload instanceof Error) {
       action.error = true;

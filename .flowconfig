@@ -1,0 +1,11 @@
+[ignore]
+.*/findup/.*
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]

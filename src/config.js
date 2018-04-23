@@ -1,4 +1,14 @@
-export default {
+// @flow
+export type Config = {|
+  separator: string,
+  delimiter: string,
+  next: string,
+  start: string,
+  error: string,
+  complete: string,
+|};
+
+const config: Config = {
   separator: '||',
   delimiter: '.',
   next: 'next',
@@ -6,3 +16,5 @@ export default {
   error: 'error',
   complete: 'complete',
 };
+
+export default config;

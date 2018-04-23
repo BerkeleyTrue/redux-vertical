@@ -1,9 +1,17 @@
+// @flow
 import invariant from 'invariant';
 import config from './config.js';
 
 import addNS from './add-ns.js';
 
-export default function createAsyncTypes(type, delimiter = config.delimiter) {
+export type AsyncActionTypeMap = {|
+  [key: string]: string,
+|};
+
+export default function createAsyncTypes(
+  type: string,
+  delimiter: string = config.delimiter,
+): AsyncActionTypeMap {
   invariant(
     type && typeof type === 'string',
     'createAsyncTypes expected a string for type, but got %s',

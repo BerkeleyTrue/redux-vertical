@@ -1,11 +1,20 @@
+// @flow
+import type { Reducer, Action } from './flow-types.js';
 import _ from 'lodash';
 import invariant from 'invariant';
 
 import addNS from './add-ns.js';
 import handleAction from './handle-action.js';
 
-function creacteReducers(createHandlers, defaultState) {
-  const handlers = createHandlers();
+type Handlers = {
+  [type: string]: Reducer,
+};
+
+function creacteReducers<S>(
+  createHandlers: () => Handlers,
+  defaultState: S,
+): Array<Reducer> {
+  const handlers: Handlers = createHandlers();
   invariant(
     _.isPlainObject(handlers),
     'createHandlers should return a plain object.',
@@ -14,13 +23,18 @@ function creacteReducers(createHandlers, defaultState) {
     handleAction(type, handlers[type], defaultState),
   );
 }
-export default function handleActions(createHandlers, defaultState, ns) {
-  let reducers;
+
+export default function handleActions<S>(
+  createHandlers: () => Handlers,
+  defaultState: S,
+  ns: string,
+): Reducer {
+  let reducers: Array<Reducer>;
   invariant(
     _.isFunction(createHandlers),
     'createHandlers should be a function',
   );
-  function reducer(state = defaultState, action) {
+  function reducer(state: S = defaultState, action: Action): S {
     if (!reducers) {
       reducers = creacteReducers(createHandlers, defaultState);
     }
