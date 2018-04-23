@@ -8,8 +8,8 @@ import type { AsyncActionTypeMap } from './create-async-types.js';
 
 export default function createAction<Payload: any, Meta: any>(
   _type: string | AsyncActionTypeMap,
-  payloadCreator: (...any) => Payload = _.identity,
-  metaCreator: (...any) => Meta,
+  payloadCreator?: (...any) => Payload = _.identity,
+  metaCreator?: void | (...any) => Meta,
 ): (...any) => Action {
   invariant(_type, 'type cannot be undefined or null');
   invariant(
@@ -39,6 +39,11 @@ export default function createAction<Payload: any, Meta: any>(
     }
 
     if (hasMeta) {
+      // flow does not currently do user defined
+      // type guards (i.e. lodash isFunction)
+      // We ignore the following typing error
+      // (metaCreator undefined is not compatible with function)
+      // $FlowFixMe
       action.meta = metaCreator(...args);
     }
 
