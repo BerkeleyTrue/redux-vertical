@@ -1,3 +1,13 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/BerkeleyTrue/redux-vertical/compare/v1.1.0...v1.1.1) (2018-04-23)
+
+
+### Bug Fixes
+
+* **flow:** Type can be string or AsyncActionMap ([3bd577a](https://github.com/BerkeleyTrue/redux-vertical/commit/3bd577a))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/BerkeleyTrue/redux-vertical/compare/v1.0.0...v1.1.0) (2018-04-23)
 
