@@ -4,9 +4,10 @@ import _ from 'lodash';
 import invariant from 'invariant';
 
 import addNS from './add-ns.js';
+import type { AsyncActionTypeMap } from './create-async-types.js';
 
 export default function createAction<Payload: any, Meta: any>(
-  _type: string,
+  _type: string | AsyncActionTypeMap,
   payloadCreator: (...any) => Payload = _.identity,
   metaCreator: (...any) => Meta,
 ): (...any) => Action {

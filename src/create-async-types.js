@@ -6,6 +6,7 @@ import addNS from './add-ns.js';
 
 export type AsyncActionTypeMap = {|
   [key: string]: string,
+  +toString: () => string,
 |};
 
 export default function createAsyncTypes(

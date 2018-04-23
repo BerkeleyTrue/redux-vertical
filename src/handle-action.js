@@ -4,11 +4,16 @@ import _ from 'lodash';
 import invariant from 'invariant';
 
 import config from './config';
+import type { AsyncActionTypeMap } from './create-async-types.js';
 
 export default function handleAction<
   S,
   RO: { next?: Reducer, throw?: Reducer },
->(type: string, reducer: Reducer | RO = _.identity, defaultState: S): Reducer {
+>(
+  type: string | AsyncActionTypeMap,
+  reducer: Reducer | RO = _.identity,
+  defaultState: S,
+): Reducer {
   invariant(type, 'type should be a string or an async type object');
   const types = _.toString(type).split(config.separator);
   invariant(
