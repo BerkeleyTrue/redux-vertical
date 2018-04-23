@@ -1,6 +1,6 @@
 # Redux-Vertical
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/BerkeleyTrue/redux-vertical.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/BerkeleyTrue/redux-vertical.svg)](https://greenkeeper.io/) [![Coverage Status](https://coveralls.io/repos/github/BerkeleyTrue/redux-vertical/badge.svg?branch=master)](https://coveralls.io/github/BerkeleyTrue/redux-vertical?branch=master)
 
 Build large redux apps using vertically separated features.
 
