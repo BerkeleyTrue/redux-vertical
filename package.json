@@ -26,7 +26,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-freecodecamp"
+      "path": "cz-conventional-changelog"
     }
   },
   "ava": {
@@ -40,6 +40,8 @@
     "invariant": "^2.2.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
     "ava": "^0.25.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.0",
@@ -51,7 +53,7 @@
     "browser-sync": "^2.18.13",
     "commitizen": "^2.9.6",
     "coveralls": "^3.0.0",
-    "cz-freecodecamp": "^1.0.0",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.5.0",
     "eslint-plugin-class-property": "^1.0.6",
     "eslint-plugin-flowtype": "^2.46.3",
