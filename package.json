@@ -21,12 +21,12 @@
     "format": "prettier '*.js' 'src/**/*' 'test/**/*' --trailing-comma all --single-quote --write",
     "postformat": "npm run lint:fix",
     "commit": "git-cz",
-    "commitmsg": "validate-commit-msg",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
     "prepublishOnly": "npm run build"
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-freecodecamp"
+      "path": "cz-conventional-changelog"
     }
   },
   "ava": {
@@ -40,6 +40,8 @@
     "invariant": "^2.2.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
     "ava": "^0.25.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.0",
@@ -51,7 +53,7 @@
     "browser-sync": "^2.18.13",
     "commitizen": "^2.9.6",
     "coveralls": "^3.0.0",
-    "cz-freecodecamp": "^1.0.0",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.5.0",
     "eslint-plugin-class-property": "^1.0.6",
     "eslint-plugin-flowtype": "^2.46.3",
@@ -66,8 +68,7 @@
     "nyc": "^11.1.0",
     "prettier": "^1.5.2",
     "redux": "^4.0.0",
-    "sinon": "^5.0.0",
-    "validate-commit-msg": "^2.14.0"
+    "sinon": "^5.0.0"
   },
   "keywords": [
     "react",
@@ -75,5 +76,13 @@
     "redux-actions",
     "types"
   ],
-  "license": "MIT"
+  "author": "Berkeley Martinez <berkeley@berkeleytrue.com> (http://www.berkeleytrue.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BerkeleyTrue/redux-vertical/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BerkeleyTrue/redux-vertical.git"
+  }
 }
