@@ -9,7 +9,7 @@ import type { AsyncActionTypeMap } from './create-async-types.js';
 export default function createAction<Payload: any, Meta: any>(
   _type: string | AsyncActionTypeMap,
   payloadCreator?: (...any) => Payload = _.identity,
-  metaCreator?: void | (...any) => Meta,
+  metaCreator?: void | ((...any) => Meta),
 ): (...any) => Action {
   invariant(_type, 'type cannot be undefined or null');
   invariant(
