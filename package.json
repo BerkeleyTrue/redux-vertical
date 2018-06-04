@@ -76,5 +76,13 @@
     "redux-actions",
     "types"
   ],
-  "license": "MIT"
+  "author": "Berkeley Martinez <berkeley@berkeleytrue.com> (http://www.berkeleytrue.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BerkeleyTrue/redux-vertical/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BerkeleyTrue/redux-vertical.git"
+  }
 }
