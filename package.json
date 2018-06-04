@@ -21,7 +21,7 @@
     "format": "prettier '*.js' 'src/**/*' 'test/**/*' --trailing-comma all --single-quote --write",
     "postformat": "npm run lint:fix",
     "commit": "git-cz",
-    "commitmsg": "validate-commit-msg",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
     "prepublishOnly": "npm run build"
   },
   "config": {
@@ -68,8 +68,7 @@
     "nyc": "^11.1.0",
     "prettier": "^1.5.2",
     "redux": "^4.0.0",
-    "sinon": "^5.0.0",
-    "validate-commit-msg": "^2.14.0"
+    "sinon": "^5.0.0"
   },
   "keywords": [
     "react",
