@@ -60,7 +60,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "git+https://github.com/berkeleytrue/eslint-plugin-react.git#feat/rwr",
-    "flow-bin": "^0.74.0",
+    "flow-bin": "^0.76.0",
     "flow-copy-source": "^2.0.0",
     "flux-standard-action": "^2.0.2",
     "husky": "^0.14.3",
