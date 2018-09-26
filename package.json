@@ -63,7 +63,7 @@
     "flow-bin": "^0.74.0",
     "flow-copy-source": "^2.0.0",
     "flux-standard-action": "^2.0.2",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0",
     "nodemon": "^1.11.0",
     "nyc": "^12.0.1",
     "prettier": "^1.5.2",
