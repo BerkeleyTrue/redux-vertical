@@ -53,7 +53,7 @@
     "browser-sync": "^2.18.13",
     "commitizen": "^2.9.6",
     "coveralls": "^3.0.0",
-    "cz-conventional-changelog": "^2.1.0",
+    "cz-conventional-changelog": "^3.0.0",
     "eslint": "^4.5.0",
     "eslint-plugin-class-property": "^1.0.6",
     "eslint-plugin-flowtype": "^2.46.3",
