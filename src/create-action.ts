@@ -1,4 +1,3 @@
-// @flow
 import type { Action } from './flow-types.js';
 import _ from 'lodash';
 import invariant from 'invariant';

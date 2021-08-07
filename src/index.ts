@@ -1,4 +1,3 @@
-// @flow
 export { default as combineActions } from './combine-actions.js';
 export { default as combineReducers } from './combine-reducers.js';
 export { default as composeReducers } from './compose-reducers.js';

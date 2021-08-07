@@ -1,13 +1,8 @@
-// @flow
 import invariant from 'invariant';
-
-import config from './config.js';
-import addNS from './add-ns.js';
-import type { AsyncActionTypeMap } from './create-async-types.js';
-
-export type ActionTypeMap = {
-  [type: string]: string | AsyncActionTypeMap,
-};
+import config from './config';
+import addNS from './add-ns';
+import type {AsyncActionTypeMap} from './create-async-types';
+export type ActionTypeMap = Record<string, string | AsyncActionTypeMap>;
 export default function createTypes(
   types: Array<string>,
   ns: string,
@@ -38,14 +33,17 @@ export default function createTypes(
     ) {
       types[type] = Object.keys(type).reduce((typeObj, key) => {
         const value = type[key];
+
         if (key === 'toString') {
           return typeObj;
         } else if (value && typeof value === 'string') {
           typeObj[key] = ns + delimiter + value;
         }
+
         return typeObj;
       }, addNS(ns + delimiter + type, {}));
     }
+
     return types;
   }, {});
 }

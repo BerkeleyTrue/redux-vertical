@@ -1,26 +1,24 @@
-// @flow
-import type { Reducer, Action } from './flow-types.js';
+import {$Shape} from 'utility-types';
+import type {Reducer, Action} from './flow-types';
 import _ from 'lodash';
 import invariant from 'invariant';
-
 const isCombinedReducer = Symbol('@@isCombinedReducer');
-
 export default function combineReducers<S>(
   ...reducers: Array<Reducer>
 ): Reducer {
   let cache = new Map();
   let seen = new Set();
-
   // get cached reducers
   reducers = reducers.reduce((reducers, reducer) => {
     let _reducer = reducer;
+
     if (reducer && reducer[isCombinedReducer]) {
       // if is an empty combinedReducer, filter out
       _reducer = reducer.getCached();
     }
+
     return reducers.concat(_reducer);
   }, []);
-
   // check the reducers
   reducers.forEach(reducer => {
     invariant(
@@ -35,12 +33,10 @@ export default function combineReducers<S>(
       reducer,
     );
   });
-
   // filter out duplicates
-  reducers = reducers.filter(
-    r => seen.has(r.toString()) ? false : seen.add(r.toString()),
+  reducers = reducers.filter(r =>
+    seen.has(r.toString()) ? false : seen.add(r.toString()),
   );
-
   // save reducers in cache
   reducers.forEach(r => cache.set(r.toString(), r));
 
@@ -49,17 +45,23 @@ export default function combineReducers<S>(
     let hasChanged = false;
     const nextState = {};
     const numOfReducers = reducers.length;
+
     for (let i = 0; i < numOfReducers; i++) {
       const reducer = reducers[i];
+
       const reducerNS = _.toString(reducer);
+
       const previousStateForKey = state[reducerNS];
       const nextStateForKey = reducer(previousStateForKey, action);
+
       if (typeof nextStateForKey === 'undefined') {
         throw new Error(`got undefined state for ${reducerNS}`);
       }
+
       nextState[reducerNS] = nextStateForKey;
       hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
     }
+
     return hasChanged ? nextState : state;
   }
 

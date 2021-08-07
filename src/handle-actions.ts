@@ -1,14 +1,10 @@
 // @flow
-import type { Reducer, Action } from './flow-types.js';
+import type {Reducer, Action} from './flow-types';
 import _ from 'lodash';
 import invariant from 'invariant';
-
-import addNS from './add-ns.js';
-import handleAction from './handle-action.js';
-
-type Handlers = {
-  [type: string]: Reducer,
-};
+import addNS from './add-ns';
+import handleAction from './handle-action';
+type Handlers = Record<string, Reducer>;
 
 function creacteReducers<S>(
   createHandlers: () => Handlers,
@@ -34,14 +30,18 @@ export default function handleActions<S>(
     _.isFunction(createHandlers),
     'createHandlers should be a function',
   );
+
   function reducer(state: S = defaultState, action: Action): S {
     if (!reducers) {
       reducers = creacteReducers(createHandlers, defaultState);
     }
+
     return reducers.reduce((state, reducer) => reducer(state, action), state);
   }
+
   if (ns) {
     return addNS(ns, reducer);
   }
+
   return reducer;
 }

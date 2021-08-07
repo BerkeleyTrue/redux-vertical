@@ -1,13 +1,10 @@
-// @flow
-import type { Reducer, Action } from './flow-types.js';
+import type {Reducer, Action} from './flow-types';
 import invariant from 'invariant';
-
-import addNS from './add-ns.js';
-
-export default function composeReducers<S, A: Action, R: Reducer>(
+import addNS from './add-ns';
+export default function composeReducers<S, A extends Action, R extends Reducer>(
   ns: string,
   ...reducers: Array<R>
-): (S, A) => S {
+): (arg0: S, arg1: A) => S {
   invariant(
     typeof ns === 'string',
     `ns should be a string but was given ${ns} instead`,
@@ -24,9 +21,7 @@ export default function composeReducers<S, A: Action, R: Reducer>(
     let hasChanged = false;
     return reducers.reduce((iteratedState: S, reducer: R) => {
       const nextState: S = reducer(iteratedState, action);
-
       hasChanged = hasChanged || iteratedState !== nextState;
-
       return hasChanged ? nextState : iteratedState;
     }, state);
   }
