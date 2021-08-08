@@ -1,9 +1,10 @@
-// @flow
-import type {Reducer, Action} from './flow-types';
 import _ from 'lodash';
 import invariant from 'invariant';
+
+import type { Reducer, Action } from './types';
 import addNS from './add-ns';
 import handleAction from './handle-action';
+
 type Handlers = Record<string, Reducer>;
 
 function creacteReducers<S>(

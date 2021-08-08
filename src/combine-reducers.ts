@@ -1,8 +1,9 @@
-import {$Shape} from 'utility-types';
-import type {Reducer, Action} from './flow-types';
+import type {Reducer, Action} from './types';
 import _ from 'lodash';
 import invariant from 'invariant';
+
 const isCombinedReducer = Symbol('@@isCombinedReducer');
+
 export default function combineReducers<S>(
   ...reducers: Array<Reducer>
 ): Reducer {

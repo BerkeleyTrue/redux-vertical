@@ -1,34 +1,34 @@
-import test from 'ava';
 import sinon from 'sinon';
 
 import { combineReducers } from '../src';
 
-test('should throw if is not a function', t => {
-  t.throws(() => combineReducers(null), /reducers.*functions/);
+test('should throw if is not a function', () => {
+  expect(() => combineReducers(null)).toThrowError(/reducers.*functions/);
 });
 
-test('should throw if function does not have namespace toString', t => {
-  t.throws(() => combineReducers(() => {}), /reducers.*toString function/);
+test('should throw if function does not have namespace toString', () => {
+  expect(() => combineReducers(() => ({})))
+    .toThrowError(/reducers.*toString function/);
 });
 
-test('should return a function', t => {
-  const foo = () => {};
+test('should return a function', () => {
+  const foo = () => ({});
   foo.toString = () => 'foo';
-  t.is(typeof combineReducers(foo), 'function');
+  expect(typeof combineReducers(foo)).toBe('function');
 });
 
-test('should change state per namespace', t => {
+test('should change state per namespace', () => {
   const fooReducer = (state = 0, { type }) => type === 'foo' ? 1 : state;
   const barReducer = (state = 0, { type }) => type === 'bar' ? 2 : state;
   fooReducer.toString = () => 'foo';
   barReducer.toString = () => 'bar';
   const reducer = combineReducers(fooReducer, barReducer);
 
-  t.deepEqual(reducer({}, { type: 'foo' }), { foo: 1, bar: 0 });
-  t.deepEqual(reducer({}, { type: 'bar' }), { foo: 0, bar: 2 });
+  expect(reducer({}, { type: 'foo' })).toEqual({ foo: 1, bar: 0 });
+  expect(reducer({}, { type: 'bar' })).toEqual({ foo: 0, bar: 2 });
 });
 
-test('should change state per namespace for all ns', t => {
+test('should change state per namespace for all ns', () => {
   const fooReducer = (state = { val: 0 }, { type }) =>
     type === 'foo' ? { val: 1 } : state;
   const barReducer = (state = { val: 0 }, { type }) =>
@@ -37,13 +37,13 @@ test('should change state per namespace for all ns', t => {
   barReducer.toString = () => 'bar';
   const reducer = combineReducers(fooReducer, barReducer);
 
-  t.deepEqual(reducer({}, { type: 'foo' }), {
+  expect(reducer({}, { type: 'foo' })).toEqual({
     foo: { val: 1 },
     bar: { val: 2 },
   });
 });
 
-test('should create flat reducer', t => {
+test('should create flat reducer', () => {
   const fooReducer = (state = { val: 0 }, { type }) =>
     type === 'foo' ? { val: 1 } : state;
   fooReducer.toString = () => 'foo';
@@ -60,25 +60,25 @@ test('should create flat reducer', t => {
   const reducer2 = combineReducers(booReducer, bazReducer);
   const reducer3 = combineReducers(reducer, reducer2);
 
-  t.deepEqual(reducer3({}, { type: 'foo' }), {
+  expect(reducer3({}, { type: 'foo' })).toEqual({
     foo: { val: 1 },
     bar: { val: 0 },
     baz: { val: 0 },
     boo: { val: 0 },
   });
-  t.deepEqual(reducer3({}, { type: 'bar' }), {
+  expect(reducer3({}, { type: 'bar' })).toEqual({
     foo: { val: 0 },
     bar: { val: 2 },
     baz: { val: 0 },
     boo: { val: 0 },
   });
-  t.deepEqual(reducer3({}, { type: 'baz' }), {
+  expect(reducer3({}, { type: 'baz' })).toEqual({
     foo: { val: 0 },
     bar: { val: 0 },
     baz: { val: 3 },
     boo: { val: 0 },
   });
-  t.deepEqual(reducer3({}, { type: 'boo' }), {
+  expect(reducer3({}, { type: 'boo' })).toEqual({
     foo: { val: 0 },
     bar: { val: 0 },
     baz: { val: 0 },
@@ -86,7 +86,7 @@ test('should create flat reducer', t => {
   });
 });
 
-test('should filter out double entries', t => {
+test('should filter out double entries', () => {
   const fooReducer = sinon.spy(
     (state = { val: 0 }, { type }) => type === 'foo' ? { val: 1 } : state,
   );
@@ -98,12 +98,12 @@ test('should filter out double entries', t => {
   const reducer = combineReducers(fooReducer, barReducer);
   const combined = combineReducers(reducer, reducer);
   const actual = combined(undefined, { type: 'foo' });
-  t.is(actual.foo.val, 1);
-  t.is(fooReducer.callCount, 1);
-  t.is(barReducer.callCount, 1);
+  expect(actual.foo.val).toBe(1);
+  expect(fooReducer.callCount).toBe(1);
+  expect(barReducer.callCount).toBe(1);
 });
 
-test("should not default other ns's out double entries", t => {
+test("should not default other ns's out double entries", () => {
   const fooReducer = (state = { val: 0 }, { type }) =>
     type === 'booo' ? { val: 1 } : state;
   fooReducer.toString = () => 'booo';
@@ -112,11 +112,11 @@ test("should not default other ns's out double entries", t => {
   barReducer.toString = () => 'bar';
   const reducer = combineReducers(fooReducer, barReducer);
   const actual = reducer({ bar: { val: 4 } }, { type: 'booo' });
-  t.is(actual.booo.val, 1);
-  t.is(actual.bar.val, 4);
+  expect(actual.booo.val).toBe(1);
+  expect(actual.bar.val).toBe(4);
 });
 
-test('should change state with new ref', t => {
+test('should change state with new ref', () => {
   const fooReducer = (state = { val: 0 }, { type }) =>
     type === 'booo' ? { val: 1 } : state;
   fooReducer.toString = () => 'booo';
@@ -126,12 +126,12 @@ test('should change state with new ref', t => {
   const reducer = combineReducers(fooReducer, barReducer);
   const original = { bar: { val: 4 } };
   const actual = reducer(original, { type: 'booo' });
-  t.is(actual.booo.val, 1);
-  t.is(actual.bar.val, 4);
-  t.not(original, actual);
+  expect(actual.booo.val).toBe(1);
+  expect(actual.bar.val).toBe(4);
+  expect(original).not.toBe(actual);
 });
 
-test("should not change ref is state doesn't change", t => {
+test("should not change ref is state doesn't change", () => {
   const fooReducer = (state = { val: 0 }, { type }) =>
     type === 'foo' ? { val: 1 } : state;
   fooReducer.toString = () => 'foo';
@@ -141,7 +141,7 @@ test("should not change ref is state doesn't change", t => {
   const reducer = combineReducers(fooReducer, barReducer);
   const original = { foo: { val: 0 }, bar: { val: 4 } };
   const actual = reducer(original, { type: 'booo' });
-  t.is(actual.foo.val, 0);
-  t.is(actual.bar.val, 4);
-  t.is(original, actual);
+  expect(actual.foo.val).toBe(0);
+  expect(actual.bar.val).toBe(4);
+  expect(original).toBe(actual);
 });

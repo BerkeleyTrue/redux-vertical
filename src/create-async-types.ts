@@ -1,4 +1,5 @@
 import invariant from 'invariant';
+
 import config from './config';
 import addNS from './add-ns';
 

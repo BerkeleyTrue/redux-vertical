@@ -5,13 +5,11 @@
     "node": true,
     "es6": true
   },
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "plugins": [
-    "flowtype",
-    "class-property",
+    "@typescript-eslint",
     "import",
-    "jsx-a11y",
-    "react"
+    "jest"
   ],
   "settings": {
     "import/ignore": [
@@ -19,8 +17,7 @@
       "\\.json$"
     ],
     "import/extensions": [
-      ".js",
-      ".jsx"
+      ".js"
     ]
   },
   "globals": {
@@ -29,16 +26,13 @@
     "ga": true
   },
   "extends": [
-    "plugin:flowtype/recommended",
-    "plugin:jsx-a11y/recommended"
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended"
   ],
   "rules": {
-    "array-bracket-newline": [ "error", { "minItems": 2 } ],
-    "array-bracket-spacing": [ "error", "always" ],
-    "array-element-newline": [ "error", { "minItems": 2 } ],
-    "arrow-body-style": [ "error", "as-needed" ],
-    "block-scoped-var": 0,
-    "brace-style": [ 2, "1tbs", { "allowSingleLine": true } ],
     "camelcase": 2,
     "comma-dangle": [ "error", "always-multiline" ],
     "comma-spacing": [ 2, { "before": false, "after": true } ],
@@ -49,7 +43,7 @@
     "curly": 2,
     "default-case": 2,
     "dot-notation": 0,
-    "indent": [ "error", 2, { "SwitchCase": 1, "ignoredNodes": [ "JSXElement", "JSXOpeningElement" ] } ],
+    "indent": [ "error", 2, { "SwitchCase": 1 } ],
     "eol-last": 2,
     "eqeqeq": 2,
     "func-names": 0,
@@ -174,42 +168,6 @@
     "vars-on-top": 0,
     "wrap-iife": [2, "any"],
     "wrap-regex": 2,
-    "yoda": 0,
-
-    "jsx-quotes": [2, "prefer-single"],
-    "react/display-name": 2,
-    "react/jsx-boolean-value": [2, "always"],
-    "react/jsx-closing-bracket-location": [ 2, { "selfClosing": "line-aligned", "nonEmpty": "props-aligned" } ],
-    "react/jsx-closing-tag-location": [ "error" ],
-    "react/jsx-curly-spacing": [ "error", { "when": "always", "children": true } ],
-    "react/jsx-equals-spacing": [ "error", "never" ],
-    "react/jsx-first-prop-new-line": [ "error", "multiline-multiprop" ],
-    "react/jsx-indent": [ "error", 2 ],
-    "react/jsx-key": [ "error" ],
-    "react/jsx-indent-props": [ "error", 2 ],
-    "react/jsx-max-props-per-line": [ "error" ],
-    "react/jsx-no-undef": 2,
-    "react/jsx-sort-props": [2, { "ignoreCase": true }],
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/jsx-wrap-multilines": 2,
-    "react/no-did-mount-set-state": 2,
-    "react/no-did-update-set-state": 2,
-    "react/no-multi-comp": [2, { "ignoreStateless": true } ],
-    "react/prop-types": 2,
-    "react/react-in-jsx-scope": 2,
-    "react/self-closing-comp": 2,
-
-    "import/default": 2,
-    "import/export": 2,
-    "import/imports-first": 2,
-    "import/named": 2,
-    "import/namespace": 2,
-    "import/newline-after-import": 2,
-    "import/no-duplicates": 2,
-    "import/no-unresolved": 2,
-
-    "class-property/class-property-semicolon": [ "error", "never" ]
-
+    "yoda": 0
   }
 }

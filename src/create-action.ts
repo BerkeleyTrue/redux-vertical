@@ -1,15 +1,15 @@
-import type { Action } from './flow-types.js';
 import _ from 'lodash';
 import invariant from 'invariant';
 
-import addNS from './add-ns.js';
-import type { AsyncActionTypeMap } from './create-async-types.js';
+import type { Action } from './types';
+import type { AsyncActionTypeMap } from './create-async-types';
+import addNS from './add-ns';
 
-export default function createAction<Payload: any, Meta: any>(
+export default function createAction<Payload, Meta>(
   _type: string | AsyncActionTypeMap,
-  payloadCreator?: (...any) => Payload = _.identity,
-  metaCreator?: void | ((...any) => Meta),
-): (...any) => Action {
+  payloadCreator: (...any: any) => Payload = _.identity,
+  metaCreator?: ((...any: any) => Meta),
+): (...arg: any) => Action {
   invariant(_type, 'type cannot be undefined or null');
   invariant(
     _.isFunction(payloadCreator) || _.isNull(payloadCreator),
@@ -19,14 +19,14 @@ export default function createAction<Payload: any, Meta: any>(
   const finalPayloadCreator =
     _.isNull(payloadCreator) || payloadCreator === _.identity ?
       _.identity :
-      (head, ...args) =>
+      (head: any, ...args: any[]) =>
         head instanceof Error ? head : payloadCreator(head, ...args);
 
   const hasMeta = _.isFunction(metaCreator);
   const type = _type.toString();
 
-  const actionCreator = (...args) => {
-    const payload = finalPayloadCreator(...args);
+  const actionCreator = (...args: any[]) => {
+    const payload = (finalPayloadCreator as typeof payloadCreator)(...args);
     const action: Action = { type };
 
     if (payload instanceof Error) {
@@ -38,12 +38,7 @@ export default function createAction<Payload: any, Meta: any>(
     }
 
     if (hasMeta) {
-      // flow does not currently do user defined
-      // type guards (i.e. lodash isFunction)
-      // We ignore the following typing error
-      // (metaCreator undefined is not compatible with function)
-      // $FlowFixMe
-      action.meta = metaCreator(...args);
+      action.meta = (metaCreator as Function)(...args);
     }
 
     return action;

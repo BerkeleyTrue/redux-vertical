@@ -1,8 +1,10 @@
-import type {Reducer, Action} from './flow-types';
 import _ from 'lodash';
 import invariant from 'invariant';
-import config from './config';
+
+import type {Reducer, Action} from './types';
 import type {AsyncActionTypeMap} from './create-async-types';
+import config from './config';
+
 export default function handleAction<
   S,
   RO extends {

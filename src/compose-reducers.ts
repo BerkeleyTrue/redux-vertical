@@ -1,5 +1,7 @@
-import type {Reducer, Action} from './flow-types';
+import type {Reducer, Action} from './types';
+
 import invariant from 'invariant';
+
 import addNS from './add-ns';
 export default function composeReducers<S, A extends Action, R extends Reducer>(
   ns: string,
