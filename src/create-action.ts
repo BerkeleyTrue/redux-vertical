@@ -8,7 +8,7 @@ import addNS from './add-ns';
 export default function createAction<Payload, Meta>(
   _type: string | AsyncActionTypeMap,
   payloadCreator: (...any: any) => Payload = _.identity,
-  metaCreator?: ((...any: any) => Meta),
+  metaCreator?: (...any: any) => Meta,
 ): (...arg: any) => Action {
   invariant(_type, 'type cannot be undefined or null');
   invariant(
@@ -17,10 +17,10 @@ export default function createAction<Payload, Meta>(
   );
 
   const finalPayloadCreator =
-    _.isNull(payloadCreator) || payloadCreator === _.identity ?
-      _.identity :
-      (head: any, ...args: any[]) =>
-        head instanceof Error ? head : payloadCreator(head, ...args);
+    _.isNull(payloadCreator) || payloadCreator === _.identity
+      ? _.identity
+      : (head: any, ...args: any[]) =>
+          head instanceof Error ? head : payloadCreator(head, ...args);
 
   const hasMeta = _.isFunction(metaCreator);
   const type = _type.toString();

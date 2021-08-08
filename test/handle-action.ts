@@ -10,13 +10,15 @@ test('should throw if type is not a string', () => {
 });
 
 test('should throw if reducer is not an function/object/undefined', () => {
-  expect(() => handleAction('foo', null))
-    .toThrowError(/reducer.*should be a function/);
+  expect(() => handleAction('foo', null)).toThrowError(
+    /reducer.*should be a function/,
+  );
 });
 
 test('should throw if default state undefined', () => {
-  expect(() => handleAction('foo'))
-    .toThrowError(/defaultState.*should be defined/);
+  expect(() => handleAction('foo')).toThrowError(
+    /defaultState.*should be defined/,
+  );
 });
 
 test('should return a reducer', () => {
@@ -72,7 +74,7 @@ test('should work with async types', () => {
 test('should not mutate', () => {
   const reducer = handleAction(
     'foo',
-    state => Object.assign({}, state, { val: 'foo' }),
+    (state) => Object.assign({}, state, { val: 'foo' }),
     { val: 'notfoo' },
   );
   expect(reducer(undefined, { type: 'notfoo' })).toEqual({ val: 'notfoo' });

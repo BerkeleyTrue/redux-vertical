@@ -1,4 +1,4 @@
-import type {Reducer, Action} from './types';
+import type { Reducer, Action } from './types';
 import _ from 'lodash';
 import invariant from 'invariant';
 
@@ -21,7 +21,7 @@ export default function combineReducers<S>(
     return reducers.concat(_reducer);
   }, []);
   // check the reducers
-  reducers.forEach(reducer => {
+  reducers.forEach((reducer) => {
     invariant(
       typeof reducer === 'function',
       'reducers should be functions but found %s',
@@ -35,11 +35,11 @@ export default function combineReducers<S>(
     );
   });
   // filter out duplicates
-  reducers = reducers.filter(r =>
+  reducers = reducers.filter((r) =>
     seen.has(r.toString()) ? false : seen.add(r.toString()),
   );
   // save reducers in cache
-  reducers.forEach(r => cache.set(r.toString(), r));
+  reducers.forEach((r) => cache.set(r.toString(), r));
 
   // create final reducer
   function finalReducer(state: $Shape<S> & {} = {}, action: Action): $Shape<S> {

@@ -15,20 +15,12 @@ module.exports = {
     '<rootDir>/test/**/*.{js,jsx,ts,tsx}',
   ],
 
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx,ts,tsx}',
-    '!src/**/*.d.ts',
-  ],
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
 
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
     '^.+\\.module\\.(css|sass|scss|styl)$',
   ],
-  moduleNameMapper: {
-  },
-  moduleFileExtensions: [
-    'js',
-    'ts',
-    'json',
-  ],
+  moduleNameMapper: {},
+  moduleFileExtensions: ['js', 'ts', 'json'],
 };

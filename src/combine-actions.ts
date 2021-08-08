@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import config from './config';
-import type {AsyncActionTypeMap} from './create-async-types';
+import type { AsyncActionTypeMap } from './create-async-types';
 
 export default function combineActions(
   ...types: Array<string | AsyncActionTypeMap>

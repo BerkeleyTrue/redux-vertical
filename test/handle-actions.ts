@@ -5,8 +5,9 @@ test('should throw if createHandlers is not a function', () => {
 });
 
 test('should throw if createHandlers does not return a plain object', () => {
-  expect(() => handleActions(() => null, {})({}, {}))
-    .toThrowError(/createHandlers.*plain object/);
+  expect(() => handleActions(() => null, {})({}, {})).toThrowError(
+    /createHandlers.*plain object/,
+  );
 });
 
 test('should return a reducer', () => {
@@ -19,7 +20,7 @@ test('should return a reducer', () => {
 test('reducer should not mutate state', () => {
   const original = { key: 0, key2: 1 };
   const reducer = handleActions(
-    () => ({ foo: state => Object.keys({}, state, { key: 1 }) }),
+    () => ({ foo: (state) => Object.keys({}, state, { key: 1 }) }),
     {
       key: 4,
       key2: 2,

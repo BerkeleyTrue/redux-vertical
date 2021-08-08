@@ -7,5 +7,5 @@ test('should add ns to string return', () => {
   }
   addNS(ns, bar);
   expect(ns).toBe(String(bar));
-  expect(Object.keys(bar).some(key => key === 'toString')).toBe(false);
+  expect(Object.keys(bar).some((key) => key === 'toString')).toBe(false);
 });

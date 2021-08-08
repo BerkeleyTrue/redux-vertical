@@ -10,8 +10,9 @@ test('should throw if no type found', () => {
 });
 
 test('should throw delimiter is not a string', () => {
-  expect(() => createAsyncTypes('foo', null))
-    .toThrowError(/expected a string for delimiter/);
+  expect(() => createAsyncTypes('foo', null)).toThrowError(
+    /expected a string for delimiter/,
+  );
 });
 
 test('should return default object with type', () => {

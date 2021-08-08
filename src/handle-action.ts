@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import invariant from 'invariant';
 
-import type {Reducer, Action} from './types';
-import type {AsyncActionTypeMap} from './create-async-types';
+import type { Reducer, Action } from './types';
+import type { AsyncActionTypeMap } from './create-async-types';
 import config from './config';
 
 export default function handleAction<
@@ -10,7 +10,7 @@ export default function handleAction<
   RO extends {
     next?: Reducer;
     throw?: Reducer;
-  }
+  },
 >(
   type: string | AsyncActionTypeMap,
   reducer: Reducer | RO = _.identity,
@@ -45,7 +45,7 @@ export default function handleAction<
   }
 
   return function actionHandler(state: S = defaultState, action: Action): S {
-    const {type: actionType} = action;
+    const { type: actionType } = action;
 
     if (!actionType || !_.includes(types, actionType.toString())) {
       return state;

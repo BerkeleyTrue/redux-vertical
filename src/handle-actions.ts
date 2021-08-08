@@ -16,7 +16,7 @@ function creacteReducers<S>(
     _.isPlainObject(handlers),
     'createHandlers should return a plain object.',
   );
-  return Object.keys(handlers).map(type =>
+  return Object.keys(handlers).map((type) =>
     handleAction(type, handlers[type], defaultState),
   );
 }

@@ -21,7 +21,7 @@ export default function createAsyncTypes(
     'createAsyncTypes expected a string for delimiter, but got %s',
     delimiter,
   );
-  const {start, next, complete, error} = config;
+  const { start, next, complete, error } = config;
   return addNS(type, {
     [start]: type + delimiter + config.start,
     [next]: type + delimiter + config.next,

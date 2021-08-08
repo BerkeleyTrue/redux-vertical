@@ -7,8 +7,9 @@ test('should throw if is not a function', () => {
 });
 
 test('should throw if function does not have namespace toString', () => {
-  expect(() => combineReducers(() => ({})))
-    .toThrowError(/reducers.*toString function/);
+  expect(() => combineReducers(() => ({}))).toThrowError(
+    /reducers.*toString function/,
+  );
 });
 
 test('should return a function', () => {
@@ -18,8 +19,8 @@ test('should return a function', () => {
 });
 
 test('should change state per namespace', () => {
-  const fooReducer = (state = 0, { type }) => type === 'foo' ? 1 : state;
-  const barReducer = (state = 0, { type }) => type === 'bar' ? 2 : state;
+  const fooReducer = (state = 0, { type }) => (type === 'foo' ? 1 : state);
+  const barReducer = (state = 0, { type }) => (type === 'bar' ? 2 : state);
   fooReducer.toString = () => 'foo';
   barReducer.toString = () => 'bar';
   const reducer = combineReducers(fooReducer, barReducer);
@@ -87,12 +88,12 @@ test('should create flat reducer', () => {
 });
 
 test('should filter out double entries', () => {
-  const fooReducer = sinon.spy(
-    (state = { val: 0 }, { type }) => type === 'foo' ? { val: 1 } : state,
+  const fooReducer = sinon.spy((state = { val: 0 }, { type }) =>
+    type === 'foo' ? { val: 1 } : state,
   );
   fooReducer.toString = () => 'foo';
-  const barReducer = sinon.spy(
-    (state = { val: 0 }, { type }) => type === 'bar' ? { val: 2 } : state,
+  const barReducer = sinon.spy((state = { val: 0 }, { type }) =>
+    type === 'bar' ? { val: 2 } : state,
   );
   barReducer.toString = () => 'bar';
   const reducer = combineReducers(fooReducer, barReducer);

@@ -2,7 +2,7 @@ import invariant from 'invariant';
 
 import config from './config';
 import addNS from './add-ns';
-import type {AsyncActionTypeMap} from './create-async-types';
+import type { AsyncActionTypeMap } from './create-async-types';
 
 export type ActionTypeMap = Record<string, string | AsyncActionTypeMap>;
 

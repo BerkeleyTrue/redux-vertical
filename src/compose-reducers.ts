@@ -1,8 +1,8 @@
-import type {Reducer, Action} from './types';
-
 import invariant from 'invariant';
 
+import type { Reducer, Action } from './types';
 import addNS from './add-ns';
+
 export default function composeReducers<S, A extends Action, R extends Reducer>(
   ns: string,
   ...reducers: Array<R>
@@ -11,7 +11,8 @@ export default function composeReducers<S, A extends Action, R extends Reducer>(
     typeof ns === 'string',
     `ns should be a string but was given ${ns} instead`,
   );
-  reducers.forEach(reducer =>
+
+  reducers.forEach((reducer) =>
     invariant(
       typeof reducer === 'function',
       'reducer should be functions but found %s',
