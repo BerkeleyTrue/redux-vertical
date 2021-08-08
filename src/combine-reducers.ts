@@ -1,76 +1,51 @@
-import type { Reducer, Action } from './types';
-import _ from 'lodash';
+import type {
+  Action,
+  Reducer,
+  ReducersMapObject,
+  StateFromReducersMapObject,
+} from 'redux';
 import invariant from 'invariant';
 
-const isCombinedReducer = Symbol('@@isCombinedReducer');
+const toString = Object.prototype.toString;
 
-export default function combineReducers<S>(
-  ...reducers: Array<Reducer>
-): Reducer {
-  let cache = new Map();
-  let seen = new Set();
-  // get cached reducers
-  reducers = reducers.reduce((reducers, reducer) => {
-    let _reducer = reducer;
-
-    if (reducer && reducer[isCombinedReducer]) {
-      // if is an empty combinedReducer, filter out
-      _reducer = reducer.getCached();
-    }
-
-    return reducers.concat(_reducer);
-  }, []);
+export default function combineReducers(handlers: ReducersMapObject): Reducer {
   // check the reducers
-  reducers.forEach((reducer) => {
+  Object.keys(handlers).forEach((ns) => {
+    const reducer = handlers[ns];
+
     invariant(
       typeof reducer === 'function',
-      'reducers should be functions but found %s',
-      reducer,
-    );
-    invariant(
-      reducer.toString !== Function.prototype.toString,
-      `reducers must have a user defined toString function.
-      check the reducer %s`,
+      'reducer for %s should be functions but found %s',
+      ns,
       reducer,
     );
   });
-  // filter out duplicates
-  reducers = reducers.filter((r) =>
-    seen.has(r.toString()) ? false : seen.add(r.toString()),
-  );
-  // save reducers in cache
-  reducers.forEach((r) => cache.set(r.toString(), r));
 
   // create final reducer
-  function finalReducer(state: $Shape<S> & {} = {}, action: Action): $Shape<S> {
+  function finalReducer(
+    state: StateFromReducersMapObject<typeof handlers> = {},
+    action: Action,
+  ): StateFromReducersMapObject<typeof handlers> {
     let hasChanged = false;
-    const nextState = {};
-    const numOfReducers = reducers.length;
+    const nextState: StateFromReducersMapObject<typeof handlers> = {};
 
-    for (let i = 0; i < numOfReducers; i++) {
-      const reducer = reducers[i];
-
-      const reducerNS = _.toString(reducer);
-
-      const previousStateForKey = state[reducerNS];
+    Object.keys(handlers).forEach((ns) => {
+      const reducer = handlers[ns];
+      const previousStateForKey = state[ns];
       const nextStateForKey = reducer(previousStateForKey, action);
 
-      if (typeof nextStateForKey === 'undefined') {
-        throw new Error(`got undefined state for ${reducerNS}`);
-      }
+      invariant(
+        !(typeof nextStateForKey === 'undefined'),
+        'expected defined state for ns %s',
+        ns,
+      );
 
-      nextState[reducerNS] = nextStateForKey;
+      nextState[ns] = nextStateForKey;
       hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
-    }
+    });
 
     return hasChanged ? nextState : state;
   }
-
-  // mark as a combinedReducer
-  // $FlowFixMe
-  finalReducer[isCombinedReducer] = true;
-
-  finalReducer.getCached = () => Array.from(cache.values());
 
   return finalReducer;
 }

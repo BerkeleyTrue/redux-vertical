@@ -1,7 +1,6 @@
 import invariant from 'invariant';
 
 import type { Reducer, Action } from './types';
-import addNS from './add-ns';
 
 export default function composeReducers<S, A extends Action, R extends Reducer>(
   ns: string,
@@ -22,12 +21,15 @@ export default function composeReducers<S, A extends Action, R extends Reducer>(
 
   function composedReducer(state: S, action: A): S {
     let hasChanged = false;
+
     return reducers.reduce((iteratedState: S, reducer: R) => {
       const nextState: S = reducer(iteratedState, action);
+
       hasChanged = hasChanged || iteratedState !== nextState;
+
       return hasChanged ? nextState : iteratedState;
     }, state);
   }
 
-  return addNS(ns, composedReducer);
+  return composedReducer;
 }

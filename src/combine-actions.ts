@@ -1,10 +1,7 @@
-import _ from 'lodash';
-
 import config from './config';
-import type { AsyncActionTypeMap } from './create-async-types';
 
-export default function combineActions(
-  ...types: Array<string | AsyncActionTypeMap>
-): string {
-  return types.map(_.toString).join(config.separator);
+const toString = Object.prototype.toString;
+
+export default function combineActions(...types: string[]): string {
+  return types.map((type) => toString.call(type)).join(config.separator);
 }

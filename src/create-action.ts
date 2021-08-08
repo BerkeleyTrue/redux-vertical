@@ -2,11 +2,9 @@ import _ from 'lodash';
 import invariant from 'invariant';
 
 import type { Action } from './types';
-import type { AsyncActionTypeMap } from './create-async-types';
-import addNS from './add-ns';
 
 export default function createAction<Payload, Meta>(
-  _type: string | AsyncActionTypeMap,
+  _type: string,
   payloadCreator: (...any: any) => Payload = _.identity,
   metaCreator?: (...any: any) => Meta,
 ): (...arg: any) => Action {
@@ -44,5 +42,5 @@ export default function createAction<Payload, Meta>(
     return action;
   };
 
-  return addNS(type, actionCreator);
+  return actionCreator;
 }

@@ -31,8 +31,10 @@
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
+    "@types/invariant": "^2.2.34",
     "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.172",
+    "@types/sinon": "^10.0.2",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
     "babel-cli": "^6.26.0",
@@ -58,7 +60,7 @@
     "jest-watch-typeahead": "^0.6.4",
     "nodemon": "^1.11.0",
     "prettier": "^2.3.2",
-    "redux": "^4.0.0",
+    "redux": "^4.1.1",
     "sinon": "^11.1.2",
     "ts-jest": "^27.0.4",
     "typescript": "^4.3.5"

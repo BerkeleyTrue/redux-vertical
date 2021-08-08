@@ -1,47 +1,39 @@
 import _ from 'lodash';
 import invariant from 'invariant';
 
-import type { Reducer, Action } from './types';
-import addNS from './add-ns';
+import type { Action, Reducer, Handlers } from './types';
 import handleAction from './handle-action';
 
-type Handlers = Record<string, Reducer>;
-
 function creacteReducers<S>(
-  createHandlers: () => Handlers,
+  handlers: Handlers,
   defaultState: S,
 ): Array<Reducer> {
-  const handlers: Handlers = createHandlers();
-  invariant(
-    _.isPlainObject(handlers),
-    'createHandlers should return a plain object.',
-  );
-  return Object.keys(handlers).map((type) =>
-    handleAction(type, handlers[type], defaultState),
-  );
+  return Object.keys(handlers).map((type) => {
+    invariant(
+      _.isFunction(handlers[type]),
+      'handleActions expects a function for each key but found %s for %s',
+      handlers[type],
+      type,
+    );
+
+    return handleAction(type, handlers[type], defaultState);
+  });
 }
 
 export default function handleActions<S>(
-  createHandlers: () => Handlers,
+  handlers: Handlers,
   defaultState: S,
-  ns: string,
 ): Reducer {
-  let reducers: Array<Reducer>;
   invariant(
-    _.isFunction(createHandlers),
-    'createHandlers should be a function',
+    _.isPlainObject(handlers),
+    'handleActions expects an object for handlers but found %s',
+    handlers,
   );
 
+  const reducers: Array<Reducer> = creacteReducers(handlers, defaultState);
+
   function reducer(state: S = defaultState, action: Action): S {
-    if (!reducers) {
-      reducers = creacteReducers(createHandlers, defaultState);
-    }
-
     return reducers.reduce((state, reducer) => reducer(state, action), state);
-  }
-
-  if (ns) {
-    return addNS(ns, reducer);
   }
 
   return reducer;

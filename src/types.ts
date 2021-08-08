@@ -7,3 +7,5 @@ export type Action = {
   error?: boolean;
 };
 export type Reducer = ReduxReducer;
+
+export type Handlers = Record<string, Reducer>;

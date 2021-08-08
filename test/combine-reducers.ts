@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { combineReducers } from '../src';
 
 test('should throw if is not a function', () => {
-  expect(() => combineReducers(null)).toThrowError(/reducers.*functions/);
+  expect(() => combineReducers()).toThrowError(/reducers.*functions/);
 });
 
 test('should throw if function does not have namespace toString', () => {
