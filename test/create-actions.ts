@@ -1,10 +1,12 @@
-import { createAction, createAsyncTypes } from '../src';
+import { createAction } from '../src';
 
 test('should throw if type is Void', () => {
+  // @ts-ignore
   expect(() => createAction()).toThrow();
 });
 
 test('should throw if payloadCreator is not Function|Void', () => {
+  // @ts-ignore
   expect(() => createAction('foo', 'bar')).toThrow();
 });
 
@@ -37,15 +39,4 @@ test('should accept metaCreator function', () => {
     type: 'foo',
     meta: 'bar',
   });
-});
-
-test('should return type when func is toStringd', () => {
-  const ac = createAction('foo');
-  expect(String(ac)).toBe('foo');
-});
-
-test('should work with async action', () => {
-  const ac = createAction(createAsyncTypes('foo'));
-  expect(String(ac)).toBe('foo');
-  expect(ac()).toEqual({ type: 'foo' });
 });
