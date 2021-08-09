@@ -4,7 +4,7 @@ import invariant from 'invariant';
 import type { Action, Reducer, Handlers } from './types';
 import handleAction from './handle-action';
 
-function creacteReducers<S>(
+function createReducers<S>(
   handlers: Handlers,
   defaultState: S,
 ): Array<Reducer> {
@@ -30,7 +30,7 @@ export default function handleActions<S>(
     handlers,
   );
 
-  const reducers: Array<Reducer> = creacteReducers(handlers, defaultState);
+  const reducers: Array<Reducer> = createReducers(handlers, defaultState);
 
   function reducer(state: S = defaultState, action: Action): S {
     return reducers.reduce((state, reducer) => reducer(state, action), state);

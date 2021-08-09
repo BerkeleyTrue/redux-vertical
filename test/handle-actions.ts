@@ -1,18 +1,18 @@
 import { handleActions } from '../src';
 
-test('should throw if createHandlers is not a function', () => {
-  expect(() => handleActions(null)).toThrowError(/createHandlers.*function/);
+test('should throw if handlers is not a object', () => {
+  // @ts-ignore
+  expect(() => handleActions(null)).toThrowError(/handleActions.*object/);
 });
 
-test('should throw if createHandlers does not return a plain object', () => {
-  expect(() => handleActions(() => null, {})({}, {})).toThrowError(
-    /createHandlers.*plain object/,
-  );
+test('should throw if handlers has non-function value', () => {
+  // @ts-ignore
+  expect(() => handleActions({ foo: null })).toThrowError(/function.*key/);
 });
 
 test('should return a reducer', () => {
   const types = { foo: 'foo' };
-  const reducer = handleActions(() => ({ [types.foo]: () => 1 }), 0);
+  const reducer = handleActions({ [types.foo]: () => 1 }, 0);
   expect(reducer(0, { type: 'foo' })).toBe(1);
   expect(reducer(undefined, { type: 'bar' })).toBe(0);
 });
@@ -20,7 +20,7 @@ test('should return a reducer', () => {
 test('reducer should not mutate state', () => {
   const original = { key: 0, key2: 1 };
   const reducer = handleActions(
-    () => ({ foo: (state) => Object.keys({}, state, { key: 1 }) }),
+    { foo: (state) => ({ ...state, key: 1 }) },
     {
       key: 4,
       key2: 2,
@@ -32,10 +32,4 @@ test('reducer should not mutate state', () => {
   expect(original).toEqual(actual1);
   expect(actual1).not.toBe(actual2);
   expect(original).not.toBe(actual2);
-});
-
-test('should stringify to namespace', () => {
-  const types = { foo: 'foo' };
-  const reducer = handleActions(() => ({ [types.foo]: () => 1 }), 0, 'foo');
-  expect('' + reducer).toBe('foo');
 });
