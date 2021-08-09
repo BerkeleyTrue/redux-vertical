@@ -6,9 +6,17 @@ import type {
 } from 'redux';
 import invariant from 'invariant';
 
+import isPlainObject from './utils/isPlainObject';
+
 const toString = Object.prototype.toString;
 
 export default function combineReducers(handlers: ReducersMapObject): Reducer {
+  invariant(
+    isPlainObject(handlers),
+    'combineReducers expected a dictionary object of reducers but found %s',
+    handlers,
+  );
+
   // check the reducers
   Object.keys(handlers).forEach((ns) => {
     const reducer = handlers[ns];
