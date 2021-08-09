@@ -29,7 +29,7 @@ jobs:
   test-active:
 
     runs-on: ubuntu-latest
-    needs: test
+    needs: test-lts
 
     steps:
       - uses: actions/checkout@v2
