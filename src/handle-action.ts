@@ -1,7 +1,7 @@
 import invariant from 'invariant';
 
 import type { Reducer, Action } from './types';
-import config from './config';
+import constants from './constants';
 import toString from './utils/toString';
 
 export default function handleAction<S>(
@@ -11,7 +11,7 @@ export default function handleAction<S>(
 ): Reducer {
   invariant(type, 'type should be a string or an async type object');
 
-  const types = toString(type).split(config.separator);
+  const types = toString(type).split(constants.separator);
 
   invariant(
     typeof reducer === 'function',

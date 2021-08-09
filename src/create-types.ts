@@ -1,11 +1,11 @@
 import invariant from 'invariant';
 
-import config from './config';
+import constants from './constants';
 
 export type TypeMap = Record<string, string>;
 
 export default function createTypes(ns: string, types: Array<string>): TypeMap {
-  const delimiter = config.delimiter;
+  const delimiter = constants.delimiter;
 
   invariant(
     Array.isArray(types),

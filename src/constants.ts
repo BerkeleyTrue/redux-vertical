@@ -1,9 +1,11 @@
-export type Config = {
+export type Constants = {
   separator: string;
   delimiter: string;
 };
-const config: Config = {
+
+const constants: Constants = {
   separator: '||',
   delimiter: '.',
 };
-export default config;
+
+export default constants;

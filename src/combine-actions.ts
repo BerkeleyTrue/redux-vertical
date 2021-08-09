@@ -1,7 +1,6 @@
-import config from './config';
-
-const toString = String.prototype.toString;
+import constants from './constants';
+import toString from './utils/toString';
 
 export default function combineActions(...types: string[]): string {
-  return types.map((type) => toString.call(type)).join(config.separator);
+  return types.map(toString).join(constants.separator);
 }

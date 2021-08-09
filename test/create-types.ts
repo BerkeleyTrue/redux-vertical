@@ -1,9 +1,4 @@
-import { config, createTypes } from '../src';
-
-const defaultConfig = Object.assign({}, config);
-beforeEach(() => {
-  Object.assign(config, defaultConfig);
-});
+import { createTypes } from '../src';
 
 test('should throw if no types is not an array', () => {
   expect(createTypes).toThrowError(/expected a Array of strings for types/);
@@ -25,15 +20,6 @@ test('should return an object', () => {
 
 test('should add type keys to object', () => {
   const expected = { foo: 'app.foo' };
-  const actual = createTypes('app', ['foo']);
-
-  expect(expected).toEqual(actual);
-});
-
-test('should respect config delimiter', () => {
-  config.delimiter = '_';
-
-  const expected = { foo: 'app_foo' };
   const actual = createTypes('app', ['foo']);
 
   expect(expected).toEqual(actual);

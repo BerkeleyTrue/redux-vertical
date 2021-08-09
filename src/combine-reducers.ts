@@ -8,8 +8,6 @@ import invariant from 'invariant';
 
 import isPlainObject from './utils/isPlainObject';
 
-const toString = Object.prototype.toString;
-
 export default function combineReducers(handlers: ReducersMapObject): Reducer {
   invariant(
     isPlainObject(handlers),
