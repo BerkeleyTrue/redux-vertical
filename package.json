@@ -10,7 +10,6 @@
     "test": "node scripts/test",
     "cover": "npm run test -- --coverage",
     "cover:watch": "browser-sync start --ss coverage --port 3001 -f coverage/index.html & nodemon --watch src/**/* --watch test/**/* --delay 2 --exec 'npm run test && npm run cover'",
-    "cover:report": "./node_modules/.bin/codecov -F color-cloud --root=../",
     "cover:open": "open coverage/index.html",
     "format": "prettier '*.js' 'src/**/*' 'test/**/*' --write",
     "postformat": "npm run lint:fix",
