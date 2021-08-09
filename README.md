@@ -1,6 +1,6 @@
 # Redux-Vertical
 
-[![Coverage Status](https://coveralls.io/repos/github/BerkeleyTrue/redux-vertical/badge.svg?branch=master)](https://coveralls.io/github/BerkeleyTrue/redux-vertical?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/BerkeleyTrue/redux-vertical/badge.svg?branch=main)](https://coveralls.io/github/BerkeleyTrue/redux-vertical?branch=main)
 
 Build large Redux apps using vertically separated features.
 
