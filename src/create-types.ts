@@ -1,11 +1,10 @@
-import _ from 'lodash/fp';
 import invariant from 'invariant';
 
 import config from './config';
 
 export type TypeMap = Record<string, string>;
 
-export default function createTypes(types: Array<string>, ns: string): TypeMap {
+export default function createTypes(ns: string, types: Array<string>): TypeMap {
   const delimiter = config.delimiter;
 
   invariant(
@@ -20,8 +19,15 @@ export default function createTypes(types: Array<string>, ns: string): TypeMap {
     ns,
   );
 
-  return _.flow(
-    _.map((type) => [type, ns + delimiter + type]),
-    _.fromPairs,
-  )(types);
+  return types.reduce((acc, type) => {
+    invariant(
+      typeof type === 'string',
+      'expect type to be a string but found %s',
+      type,
+    );
+
+    acc[type] = ns + delimiter + type;
+
+    return acc;
+  }, {} as TypeMap);
 }
