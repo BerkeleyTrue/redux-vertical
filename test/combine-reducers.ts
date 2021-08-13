@@ -1,6 +1,5 @@
 import _ from 'lodash/fp';
 import type { Reducer } from 'redux';
-import sinon from 'sinon';
 
 import { combineReducers } from '../src';
 
@@ -66,4 +65,13 @@ test("should not change ref if state doesn't change", () => {
   expect(actual.fooReducer.val).toBe(0);
   expect(actual.barReducer.val).toBe(4);
   expect(original).toBe(actual);
+});
+
+test('should handle undefined state in final reducer', () => {
+  const foo: Reducer = (state = 0, { type }) => (type === 'foo' ? 1 : state);
+  const bar: Reducer = (state = 0, { type }) => (type === 'bar' ? 2 : state);
+
+  const reducer = combineReducers({ foo, bar });
+  const actual = reducer(undefined, { type: 'foo' });
+  expect(actual.foo).toBe(1);
 });

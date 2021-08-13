@@ -62,3 +62,11 @@ test('should not mutate', () => {
   expect(actual2).toEqual(original);
   expect(actual2).toBe(original);
 });
+
+test('should default reducer to identity', () => {
+  const initState = {};
+  const expectedState = {};
+  const reducer = handleAction('foo', undefined, {});
+
+  expect(reducer(initState, { type: 'foo' })).toEqual(initState);
+});
