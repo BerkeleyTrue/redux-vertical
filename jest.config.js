@@ -1,7 +1,18 @@
+require('./config/env');
+
+let coverageReporters = ['lcov', 'text', 'json', 'clover'];
+
+if (!process.env.CI) {
+  coverageReporters = [
+    'html-spa',
+  ];
+}
+
 module.exports = {
   clearMocks: true,
   collectCoverage: true,
   coverageDirectory: 'coverage',
+  coverageReporters,
   resolver: require.resolve('jest-pnp-resolver'),
   testURL: 'http://localhost',
   preset: 'ts-jest',
