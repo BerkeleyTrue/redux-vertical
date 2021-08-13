@@ -1,3 +1,12 @@
+## [2.0.1](https://github.com/BerkeleyTrue/redux-vertical/compare/v2.0.0...v2.0.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* **create|handle-action:** remove lodash requirement ([19d5d2a](https://github.com/BerkeleyTrue/redux-vertical/commit/19d5d2aa084f57b59556aa4b7fa9c3b363905334))
+
+
+
 # [2.0.0](https://github.com/BerkeleyTrue/redux-vertical/compare/v1.1.2...v2.0.0) (2021-08-13)
 
 
