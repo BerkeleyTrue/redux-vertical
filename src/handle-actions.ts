@@ -1,8 +1,8 @@
-import _ from 'lodash';
 import invariant from 'invariant';
 
 import type { Action, Reducer, Handlers } from './types';
 import handleAction from './handle-action';
+import isPlainObject from './utils/isPlainObject';
 
 function createReducers<S>(
   handlers: Handlers,
@@ -10,7 +10,7 @@ function createReducers<S>(
 ): Array<Reducer> {
   return Object.keys(handlers).map((type) => {
     invariant(
-      _.isFunction(handlers[type]),
+      typeof handlers[type] === 'function',
       'handleActions expects a function for each key but found %s for %s',
       handlers[type],
       type,
@@ -25,7 +25,7 @@ export default function handleActions<S>(
   defaultState: S,
 ): Reducer {
   invariant(
-    _.isPlainObject(handlers),
+    isPlainObject(handlers),
     'handleActions expects an object for handlers but found %s',
     handlers,
   );
