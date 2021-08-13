@@ -46,7 +46,8 @@ if (
   // not ci
   !process.env.CI &&
   // and not coverage
-  !argv.includes('--coverage')
+  !argv.includes('--coverage') &&
+  !argv.includes('--no-watch')
 ) {
   // https://github.com/facebook/create-react-app/issues/5210
   const hasSourceControl = isInGitRepository() || isInMercurialRepository();

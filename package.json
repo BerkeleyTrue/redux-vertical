@@ -6,16 +6,15 @@
   "scripts": {
     "lint": "eslint --ext=js,jsx .",
     "lint:fix": "eslint . --ext=js,jsx --fix",
-    "xpretest": "npm run lint",
+    "pretest": "npm run lint",
     "test": "node scripts/test",
     "cover": "npm run test -- --coverage",
     "cover:watch": "browser-sync start --ss coverage --port 3001 -f coverage/index.html & nodemon --watch src/**/* --watch test/**/* --delay 2 --exec 'npm run test && npm run cover'",
     "cover:open": "open coverage/index.html",
     "format": "prettier '*.js' 'src/**/*' 'test/**/*' --write",
     "postformat": "npm run lint:fix",
-    "commit": "git-cz",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepare": "husky install"
   },
   "config": {
     "commitizen": {
@@ -50,7 +49,7 @@
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jest": "^24.4.0",
-    "husky": "^7.0.1",
+    "husky": "^7.0.0",
     "jest": "^27.0.6",
     "jest-circus": "^27.0.6",
     "jest-pnp-resolver": "^1.2.2",
