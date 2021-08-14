@@ -17,6 +17,14 @@
     "prepublishOnly": "npm run build",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "*.js": [
+      "npm run format"
+    ],
+    "*.ts": [
+      "npm run format"
+    ]
+  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
@@ -58,6 +66,7 @@
     "jest-pnp-resolver": "^1.2.2",
     "jest-resolve": "^27.0.6",
     "jest-watch-typeahead": "^0.6.4",
+    "lint-staged": "^11.1.2",
     "lodash": "^4.17.21",
     "nodemon": "^1.11.0",
     "prettier": "^2.3.2",
