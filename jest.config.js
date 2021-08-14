@@ -3,9 +3,7 @@ require('./config/env');
 let coverageReporters = ['lcov', 'text', 'json', 'clover'];
 
 if (!process.env.CI) {
-  coverageReporters = [
-    'html-spa',
-  ];
+  coverageReporters = ['html-spa'];
 }
 
 module.exports = {

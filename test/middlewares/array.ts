@@ -3,7 +3,6 @@ import type { Dispatch } from 'redux';
 import { spy } from 'sinon';
 import arrayMiddleware from '../../src/middlewares/array';
 
-
 test('should dispatch each action in an array', () => {
   const dispatch: Dispatch = spy();
   const next: Dispatch = spy();
