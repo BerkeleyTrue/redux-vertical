@@ -1,3 +1,14 @@
+# [2.1.0](https://github.com/BerkeleyTrue/redux-vertical/compare/v2.0.1...v2.1.0) (2021-08-14)
+
+
+### Features
+
+* added create-multi-action ([e869b13](https://github.com/BerkeleyTrue/redux-vertical/commit/e869b1340764778b29a793e2932605795827f82a))
+* added map-from-action ([647bde8](https://github.com/BerkeleyTrue/redux-vertical/commit/647bde83deebcb87d93d150abad8f58d07b32bd9))
+* **middlwares:** add array middleware ([3337ab9](https://github.com/BerkeleyTrue/redux-vertical/commit/3337ab9723f61ed7e1e4685ca6b437830b8f5db1))
+
+
+
 ## [2.0.1](https://github.com/BerkeleyTrue/redux-vertical/compare/v2.0.0...v2.0.1) (2021-08-13)
 
 
