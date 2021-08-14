@@ -8,3 +8,4 @@ export { default as handleActions } from './handle-actions';
 export { default as arrayMiddleware } from './middlewares/array';
 export { default as mapFromAction } from './map-from-action';
 export type { MapAction, Updater } from './map-from-action';
+export { default as createMultiAction } from './create-multi-action';
